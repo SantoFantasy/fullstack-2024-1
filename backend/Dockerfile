@@ -1,4 +1,4 @@
-FROM node:21.5.0-alpine3.15 as baseImg
+FROM node:20.14.0-slim as baseImg
 
 WORKDIR /app
 COPY package.json .
