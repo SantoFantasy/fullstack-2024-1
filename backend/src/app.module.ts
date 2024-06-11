@@ -18,7 +18,7 @@ dotenv.config();
       database: process.env.DB_NAME || 'biblioteca',
       models: [Livro],
     }),
-    LivrosModule
+    LivrosModule,
   ],
   controllers: [AppController],
   providers: [AppService],

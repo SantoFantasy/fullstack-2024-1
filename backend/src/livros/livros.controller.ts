@@ -3,22 +3,20 @@ import { LivrosService } from './livros.service';
 
 @Controller('livros')
 export class LivrosController {
-  constructor(
-    private livrosService: LivrosService
-  ){}
+  constructor(private livrosService: LivrosService) {}
 
   @Get()
-  async findAll(){
+  async findAll() {
     return this.livrosService.findAll();
   }
 
   @Get('/:isbn')
-  async findOne(isbn: string){
+  async findOne(isbn: string) {
     return this.livrosService.findOne(isbn);
   }
 
   @Get('/remove/:isbn')
-  async remove(isbn: string){
+  async remove(isbn: string) {
     return this.livrosService.remove(isbn);
   }
 }
