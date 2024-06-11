@@ -3,8 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Livro } from './livros/livros.model';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import { LivrosModule } from './livros/livros.module';
+import { UsuariosController } from './usuarios/usuarios.controller';
+import { UsuariosService } from './usuarios/usuarios.service';
+import { UsuariosModule } from './usuarios/usuarios.module';
 dotenv.config();
 
 @Module({
@@ -19,8 +22,9 @@ dotenv.config();
       models: [Livro],
     }),
     LivrosModule,
+    UsuariosModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, UsuariosController],
+  providers: [AppService, UsuariosService],
 })
 export class AppModule {}

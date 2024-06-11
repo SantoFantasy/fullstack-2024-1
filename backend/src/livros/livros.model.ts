@@ -13,4 +13,19 @@ export class Livro extends Model {
 
   @Column
   ano: number;
+
+  @Column
+  genero: string;
+
+  @Column
+  resumo: string;
+
+  @Column
+  palavraschave: string;
+
+  @Column
+  status: number;
+
+  @Column
+  localizacao: string;
 }
