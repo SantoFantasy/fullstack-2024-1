@@ -1,31 +1,70 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  Table,
+  PrimaryKey,
+  AutoIncrement,
+  NotNull,
+  HasMany,
+} from 'sequelize-typescript';
+import { Livro } from 'src/livros/livros.model';
 
 @Table
 export class Usuario extends Model {
   @Column
-  ID: number;
+  @AutoIncrement
+  @PrimaryKey
+  cod_usuario: number;
 
   @Column
+  @NotNull
   nome: string;
 
   @Column
+  @NotNull
+  rg: string;
+
+  @Column
+  @NotNull
+  data_nascimento: Date;
+
+  @Column
+  @NotNull
+  sexo: string;
+
+  @Column
+  @NotNull
   endereco: string;
 
   @Column
+  @NotNull
+  bairro: string;
+
+  @Column
+  @NotNull
+  cidade: string;
+
+  @Column
+  @NotNull
+  cep: string;
+
+  @Column
+  @NotNull
   telefone: string;
 
   @Column
+  @NotNull
   email: string;
 
   @Column
-  nascimento: Date;
+  @NotNull
+  curso: string;
 
   @Column
-  tipo_usuario: Date;
+  @NotNull
+  semestre: number;
 
   @Column
-  multa_pendente: boolean;
-
-  @Column
-  qtd_livros_emprestados: number;
+  @HasMany(() => Livro)
+  cod_livro: number;
 }

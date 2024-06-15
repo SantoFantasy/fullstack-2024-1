@@ -1,31 +1,74 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  Model,
+  Table,
+  PrimaryKey,
+  AutoIncrement,
+  Unique,
+  NotNull,
+  HasMany,
+} from 'sequelize-typescript';
+import { Categoria } from 'src/categorias/categorias.model';
 
 @Table
 export class Livro extends Model {
   @Column
-  isbn: string;
+  @PrimaryKey
+  @AutoIncrement
+  cod_catalogacao: number;
 
   @Column
+  @AutoIncrement
+  @Unique
+  @NotNull
+  cod_livro: number;
+
+  @Column
+  @NotNull
   titulo: string;
 
   @Column
-  autor: string;
+  @NotNull
+  nome_autores: string;
 
   @Column
-  ano: number;
+  @NotNull
+  ano_publicacao: number;
 
   @Column
-  genero: string;
+  @NotNull
+  cod_isbn: string;
 
   @Column
-  resumo: string;
+  @NotNull
+  area: string;
 
   @Column
-  palavraschave: string;
+  @NotNull
+  idioma: string;
 
   @Column
-  status: number;
+  @NotNull
+  subarea: string;
 
   @Column
-  localizacao: string;
+  @NotNull
+  data_tombo: Date;
+
+  @Column
+  @NotNull
+  @HasMany(() => Categoria)
+  cod_categoria: number;
+
+  @Column
+  @NotNull
+  quantidade_paginas: number;
+
+  @Column
+  @NotNull
+  classificacao: string;
+
+  @Column
+  @NotNull
+  cod_catalgogacao: number;
 }
