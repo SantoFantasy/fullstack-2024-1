@@ -23,6 +23,25 @@ services:
     networks:
       - biblioteca-network
 
+  biblioteca_backend:
+    container_name: biblioteca_backend
+    build: 
+      context: ../backend
+      dockerfile: Dockerfile
+    image: biblioteca_backend
+    ports:
+      - "8080:3000"
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres_biblioteca
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: biblioteca
+    networks:
+      - biblioteca-network
+
 networks:
   biblioteca-network:
     driver: "bridge"
