@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Delete, Get } from '@nestjs/common';
 import { CategoriasService } from './categorias.service';
 
 @Controller('categorias')
@@ -15,7 +15,7 @@ export class CategoriasController {
     return this.categoriasService.findOne(cod_categoria);
   }
 
-  @Get('/remove/:cod_categoria')
+  @Delete('/remove/:cod_categoria')
   async remove(cod_categoria: number) {
     return this.categoriasService.remove(cod_categoria);
   }

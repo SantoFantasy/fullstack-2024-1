@@ -6,7 +6,7 @@ import {
   AutoIncrement,
   Unique,
   NotNull,
-  HasMany,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { Categoria } from 'src/categorias/categorias.model';
 
@@ -57,7 +57,7 @@ export class Livro extends Model {
 
   @Column
   @NotNull
-  @HasMany(() => Categoria)
+  @BelongsTo(() => Categoria)
   cod_categoria: number;
 
   @Column
