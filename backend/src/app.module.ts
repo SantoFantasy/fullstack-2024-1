@@ -10,6 +10,11 @@ import { UsuariosService } from './usuarios/usuarios.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { CategoriasController } from './categorias/categorias.controller';
 import { CategoriasService } from './categorias/categorias.service';
+import { AdminsController } from './admins/admins.controller';
+import { AdminsService } from './admins/admins.service';
+import { AdminsModule } from './admins/admins.module';
+import { CategoriasModule } from './categorias/categorias.module';
+import { BibliotecariosModule } from './bibliotecarios/bibliotecarios.module';
 dotenv.config();
 
 @Module({
@@ -25,8 +30,16 @@ dotenv.config();
     }),
     LivrosModule,
     UsuariosModule,
+    AdminsModule,
+    CategoriasModule,
+    BibliotecariosModule,
   ],
-  controllers: [AppController, UsuariosController, CategoriasController],
-  providers: [AppService, UsuariosService, CategoriasService],
+  controllers: [
+    AppController,
+    UsuariosController,
+    CategoriasController,
+    AdminsController,
+  ],
+  providers: [AppService, UsuariosService, CategoriasService, AdminsService],
 })
 export class AppModule {}
