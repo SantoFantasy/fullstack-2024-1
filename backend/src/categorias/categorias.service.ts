@@ -25,4 +25,21 @@ export class CategoriasService {
     const categoria = await this.findOne(cod_categoria);
     await categoria.destroy();
   }
+
+  async create(categoriaData: any): Promise<Categoria> {
+    const categoria = new this.categoriaModel(categoriaData);
+    return categoria.save();
+  }
+
+  async update(
+    cod_categoria: number,
+    categoriaUpdates: any,
+  ): Promise<Categoria> {
+    const categoria = await this.findOne(cod_categoria);
+    if (!categoria) {
+      // TODO: throw a custom exception
+    } else {
+      return categoria.update(categoriaUpdates);
+    }
+  }
 }
