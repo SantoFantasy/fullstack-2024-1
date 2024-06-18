@@ -4,6 +4,6 @@ import { BibliotecariosController } from './bibliotecarios.controller';
 
 @Module({
   providers: [BibliotecariosService],
-  controllers: [BibliotecariosController]
+  controllers: [BibliotecariosController],
 })
 export class BibliotecariosModule {}

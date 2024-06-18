@@ -4,6 +4,6 @@ import { FuncionariosController } from './funcionarios.controller';
 
 @Module({
   providers: [FuncionariosService],
-  controllers: [FuncionariosController]
+  controllers: [FuncionariosController],
 })
 export class FuncionariosModule {}
