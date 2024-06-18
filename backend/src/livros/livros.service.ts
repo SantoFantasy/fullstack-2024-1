@@ -25,4 +25,18 @@ export class LivrosService {
     const livro = await this.findOne(isbn);
     await livro.destroy();
   }
+
+  async create(livroData: any): Promise<Livro> {
+    const livro = new this.livroModel(livroData);
+    return livro.save();
+  }
+
+  async update(isbn: string, livroUpdates: any): Promise<Livro> {
+    const livro = await this.findOne(isbn);
+    if (!livro) {
+      // TODO: throw a custom exception
+    } else {
+      return livro.update(livroUpdates);
+    }
+  }
 }
