@@ -15,6 +15,7 @@ import { AdminsService } from './admins/admins.service';
 import { AdminsModule } from './admins/admins.module';
 import { CategoriasModule } from './categorias/categorias.module';
 import { BibliotecariosModule } from './bibliotecarios/bibliotecarios.module';
+import { FuncionariosModule } from './funcionarios/funcionarios.module';
 dotenv.config();
 
 @Module({
@@ -33,6 +34,7 @@ dotenv.config();
     AdminsModule,
     CategoriasModule,
     BibliotecariosModule,
+    FuncionariosModule,
   ],
   controllers: [
     AppController,
