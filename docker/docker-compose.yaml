@@ -1,0 +1,47 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_biblioteca
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: posrtgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - biblioteca-network
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "5050:80"
+    networks:
+      - biblioteca-network
+
+  biblioteca_backend:
+    container_name: biblioteca_backend
+    build: 
+      context: ../backend
+      dockerfile: Dockerfile
+    image: biblioteca_backend
+    ports:
+      - "8080:3000"
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres_biblioteca
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: biblioteca
+    networks:
+      - biblioteca-network
+
+networks:
+  biblioteca-network:
+    driver: "bridge"
