@@ -26,12 +26,14 @@ export class BibliotecariosService {
     await bibliotecario.destroy();
   }
 
-  async create(bibliotecarioData: any): Promise<Bibliotecarios> {
+  async create(
+    bibliotecarioData: Partial<Bibliotecarios>,
+  ): Promise<Bibliotecarios> {
     const bibliotecario = new this.bibliotecariosModel(bibliotecarioData);
     return bibliotecario.save();
   }
 
-  async update(bibliotecarioData: any): Promise<Bibliotecarios> {
+  async update(bibliotecarioData: Bibliotecarios): Promise<Bibliotecarios> {
     const bibliotecario = await this.findOne(
       bibliotecarioData.cod_bibliotecario,
     );

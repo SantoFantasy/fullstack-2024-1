@@ -1,5 +1,6 @@
-import { Controller, Delete, Post, Get } from '@nestjs/common';
+import { Controller, Delete, Post, Get, Put, Body } from '@nestjs/common';
 import { BibliotecariosService } from './bibliotecarios.service';
+import { Bibliotecarios } from './biblitecarios.model';
 
 @Controller('bibliotecarios')
 export class BibliotecariosController {
@@ -21,7 +22,12 @@ export class BibliotecariosController {
   }
 
   @Post('/create')
-  async create(bibliotecarioData: any) {
+  async create(@Body() bibliotecarioData: Bibliotecarios) {
     return this.bibliotecariosService.create(bibliotecarioData);
+  }
+
+  @Put('/update/:cod_bibliotecario')
+  async update(@Body() bibliotecarioUpdates: Bibliotecarios) {
+    return this.bibliotecariosService.update(bibliotecarioUpdates);
   }
 }
