@@ -12,6 +12,11 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
     networks:
       - biblioteca-network
+    healthcheck:
+      test: pg_isready -U postgres -d postgres
+      interval: 10s
+      timeout: 3s
+      retries: 3
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:latest
@@ -32,7 +37,8 @@ services:
     ports:
       - "8080:3000"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
       DB_HOST: postgres_biblioteca
       DB_PORT: 5432

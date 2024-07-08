@@ -26,12 +26,12 @@ export class FuncionariosService {
     await funcionario.destroy();
   }
 
-  async create(funcionarioData: Partial<Funcionario>): Promise<Funcionario> {
+  async create(funcionarioData: any): Promise<Funcionario> {
     const funcionario = new this.funcionariosModel(funcionarioData);
     return funcionario.save();
   }
 
-  async update(funcionarioData: Funcionario): Promise<Funcionario> {
+  async update(funcionarioData: any): Promise<Funcionario> {
     const funcionario = await this.findOne(funcionarioData.cod_funcionario);
     if (!funcionario) {
       // TODO: throw a custom exception

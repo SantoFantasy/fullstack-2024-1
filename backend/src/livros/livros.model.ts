@@ -7,68 +7,73 @@ import {
   Unique,
   NotNull,
   BelongsTo,
+  ForeignKey,
 } from 'sequelize-typescript';
 import { Categoria } from 'src/categorias/categorias.model';
 
 @Table
 export class Livro extends Model {
-  @Column
   @PrimaryKey
   @AutoIncrement
+  @Column
   cod_catalogacao: number;
 
-  @Column
   @AutoIncrement
   @Unique
   @NotNull
+  @Column
   cod_livro: number;
 
-  @Column
   @NotNull
+  @Column
   titulo: string;
 
-  @Column
   @NotNull
+  @Column
   nome_autores: string;
 
-  @Column
   @NotNull
+  @Column
   ano_publicacao: number;
 
-  @Column
   @NotNull
+  @Column
   cod_isbn: string;
 
-  @Column
   @NotNull
+  @Column
   area: string;
 
-  @Column
   @NotNull
+  @Column
   idioma: string;
 
-  @Column
   @NotNull
+  @Column
   subarea: string;
 
-  @Column
   @NotNull
+  @Column
   data_tombo: Date;
 
+  @ForeignKey(() => Categoria)
   @Column
-  @NotNull
-  @BelongsTo(() => Categoria)
   cod_categoria: number;
 
-  @Column
+  @BelongsTo(() => Categoria)
+  categoria: Categoria;
+
   @NotNull
+  @Column
   quantidade_paginas: number;
 
-  @Column
   @NotNull
+  @Column
   classificacao: string;
 
-  @Column
   @NotNull
+  @Column
   cod_catalgogacao: number;
 }
+
+

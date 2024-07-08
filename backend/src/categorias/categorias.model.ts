@@ -11,17 +11,14 @@ import { Livro } from 'src/livros/livros.model';
 
 @Table
 export class Categoria extends Model {
-  @Column
   @AutoIncrement
   @PrimaryKey
+  @Column
   cod_categoria: number;
 
   @Column
-  @NotNull
   categoria: string;
 
-  @Column
-  @NotNull
   @HasMany(() => Livro)
   livro: Livro[];
 }
