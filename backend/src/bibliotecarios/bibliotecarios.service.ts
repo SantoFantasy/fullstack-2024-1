@@ -32,7 +32,9 @@ export class BibliotecariosService {
     return this.bibliotecariosModel.create(bibliotecarioData);
   }
 
-  async update(bibliotecarioData: Partial<Bibliotecarios>): Promise<Bibliotecarios> {
+  async update(
+    bibliotecarioData: Partial<Bibliotecarios>,
+  ): Promise<Bibliotecarios> {
     const bibliotecario = await this.findOne(
       bibliotecarioData.cod_bibliotecario,
     );

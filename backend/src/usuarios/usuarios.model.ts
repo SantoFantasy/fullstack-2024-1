@@ -6,7 +6,6 @@ import {
   AutoIncrement,
   NotNull,
   HasMany,
-  ForeignKey
 } from 'sequelize-typescript';
 import { Livro } from 'src/livros/livros.model';
 
@@ -18,51 +17,51 @@ export class Usuario extends Model {
   cod_usuario: number;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   nome: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   rg: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   data_nascimento: Date;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   sexo: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   endereco: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   bairro: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   cidade: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   cep: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   telefone: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   email: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   curso: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   semestre: number;
 
   @HasMany(() => Livro)

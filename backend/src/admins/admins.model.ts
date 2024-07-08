@@ -15,10 +15,10 @@ export class Admin extends Model {
   cod_admin!: number;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   usuario!: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   senha!: string;
 }

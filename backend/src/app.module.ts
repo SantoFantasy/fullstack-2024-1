@@ -6,18 +6,14 @@ import { Livro } from './livros/livros.model';
 import * as dotenv from 'dotenv';
 import { LivrosModule } from './livros/livros.module';
 import { UsuariosController } from './usuarios/usuarios.controller';
-import { UsuariosService } from './usuarios/usuarios.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { CategoriasController } from './categorias/categorias.controller';
-import { CategoriasService } from './categorias/categorias.service';
 import { AdminsController } from './admins/admins.controller';
-import { AdminsService } from './admins/admins.service';
 import { AdminsModule } from './admins/admins.module';
 import { CategoriasModule } from './categorias/categorias.module';
 import { BibliotecariosModule } from './bibliotecarios/bibliotecarios.module';
 import { FuncionariosModule } from './funcionarios/funcionarios.module';
 import { BibliotecariosController } from './bibliotecarios/bibliotecarios.controller';
-import { BibliotecariosService } from './bibliotecarios/bibliotecarios.service';
 import { Categoria } from './categorias/categorias.model';
 import { Usuario } from './usuarios/usuarios.model';
 import { Admin } from './admins/admins.model';
@@ -36,7 +32,7 @@ dotenv.config();
       database: process.env.DB_NAME || 'biblioteca',
       models: [Livro, Categoria, Usuario, Admin, Bibliotecarios, Funcionario],
       autoLoadModels: true,
-      sync: {force: true}
+      sync: { force: true },
     }),
     CategoriasModule,
     LivrosModule,
@@ -50,7 +46,7 @@ dotenv.config();
     UsuariosController,
     CategoriasController,
     AdminsController,
-    BibliotecariosController
+    BibliotecariosController,
   ],
   providers: [AppService],
 })

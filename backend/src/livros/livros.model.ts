@@ -14,46 +14,46 @@ import { Usuario } from 'src/usuarios/usuarios.model';
 
 @Table
 export class Livro extends Model {
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   cod_catalogacao: number;
-  
+
   @AutoIncrement
   @PrimaryKey
   @Unique
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   cod_livro: number;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   titulo: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   nome_autores: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   ano_publicacao: number;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   cod_isbn: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   area: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   idioma: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   subarea: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   data_tombo: Date;
 
   @ForeignKey(() => Categoria)
@@ -64,15 +64,15 @@ export class Livro extends Model {
   categoria: Categoria;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   quantidade_paginas: number;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   classificacao: string;
 
   @NotNull
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   cod_catalgogacao: number;
 
   @BelongsTo(() => Usuario)
@@ -82,5 +82,3 @@ export class Livro extends Model {
   @Column
   usuarioId: number;
 }
-
-
