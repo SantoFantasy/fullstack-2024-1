@@ -8,7 +8,7 @@ import {
   NotNull,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'funcionarios' })
+@Table
 export class Funcionario extends Model {
   @PrimaryKey
   @AutoIncrement

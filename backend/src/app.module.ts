@@ -35,6 +35,8 @@ dotenv.config();
       password: process.env.DB_PASS || 'postgres',
       database: process.env.DB_NAME || 'biblioteca',
       models: [Livro, Categoria, Usuario, Admin, Bibliotecarios, Funcionario],
+      autoLoadModels: true,
+      sync: {force: true}
     }),
     CategoriasModule,
     LivrosModule,
