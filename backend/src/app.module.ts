@@ -16,6 +16,13 @@ import { AdminsModule } from './admins/admins.module';
 import { CategoriasModule } from './categorias/categorias.module';
 import { BibliotecariosModule } from './bibliotecarios/bibliotecarios.module';
 import { FuncionariosModule } from './funcionarios/funcionarios.module';
+import { BibliotecariosController } from './bibliotecarios/bibliotecarios.controller';
+import { BibliotecariosService } from './bibliotecarios/bibliotecarios.service';
+import { Categoria } from './categorias/categorias.model';
+import { Usuario } from './usuarios/usuarios.model';
+import { Admin } from './admins/admins.model';
+import { Bibliotecarios } from './bibliotecarios/biblitecarios.model';
+import { Funcionario } from './funcionarios/funcionarios.model';
 dotenv.config();
 
 @Module({
@@ -27,12 +34,12 @@ dotenv.config();
       username: process.env.DB_USER || 'postgres',
       password: process.env.DB_PASS || 'postgres',
       database: process.env.DB_NAME || 'biblioteca',
-      models: [Livro],
+      models: [Livro, Categoria, Usuario, Admin, Bibliotecarios, Funcionario],
     }),
+    CategoriasModule,
     LivrosModule,
     UsuariosModule,
     AdminsModule,
-    CategoriasModule,
     BibliotecariosModule,
     FuncionariosModule,
   ],
@@ -41,7 +48,8 @@ dotenv.config();
     UsuariosController,
     CategoriasController,
     AdminsController,
+    BibliotecariosController
   ],
-  providers: [AppService, UsuariosService, CategoriasService, AdminsService],
+  providers: [AppService],
 })
 export class AppModule {}

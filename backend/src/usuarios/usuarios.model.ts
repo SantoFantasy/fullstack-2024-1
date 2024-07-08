@@ -6,65 +6,65 @@ import {
   AutoIncrement,
   NotNull,
   HasMany,
+  ForeignKey
 } from 'sequelize-typescript';
 import { Livro } from 'src/livros/livros.model';
 
 @Table
 export class Usuario extends Model {
-  @Column
   @AutoIncrement
   @PrimaryKey
+  @Column
   cod_usuario: number;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   nome: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   rg: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   data_nascimento: Date;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   sexo: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   endereco: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   bairro: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   cidade: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   cep: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   telefone: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   email: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   curso: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   semestre: number;
 
-  @Column
   @HasMany(() => Livro)
-  cod_livro: number;
+  Livro: Livro[];
 }
