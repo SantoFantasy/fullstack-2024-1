@@ -26,7 +26,7 @@ export class AdminsService {
     await admin.destroy();
   }
 
-  async update(adminUpdates: Admin): Promise<Admin> {
+  async update(adminUpdates: Partial<Admin>): Promise<Admin> {
     const admin = await this.findOne(adminUpdates.cod_admin);
     if (!admin) {
       // TODO: throw a custom exception
@@ -37,7 +37,6 @@ export class AdminsService {
   }
 
   async create(adminData: Partial<Admin>): Promise<Admin> {
-    const admin = new this.adminModel(adminData);
-    return admin.save();
+    return this.adminModel.create(adminData);
   }
 }
