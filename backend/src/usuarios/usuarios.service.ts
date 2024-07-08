@@ -35,8 +35,7 @@ export class UsuariosService {
   }
 
   async create(usuarioData: Partial<Usuario>): Promise<Usuario> {
-    const usuario = new this.usuarioModel(usuarioData);
-    return usuario.save();
+    return this.usuarioModel.create(usuarioData);
   }
 
   async update(usuarioUpdates: Usuario): Promise<Usuario> {

@@ -27,8 +27,7 @@ export class LivrosService {
   }
 
   async create(livroData: Partial<Livro>): Promise<Livro> {
-    const livro = new this.livroModel(livroData);
-    return livro.save();
+    return this.livroModel.create(livroData);
   }
 
   async update(livroUpdates: Livro): Promise<Livro> {

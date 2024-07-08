@@ -29,11 +29,10 @@ export class BibliotecariosService {
   async create(
     bibliotecarioData: Partial<Bibliotecarios>,
   ): Promise<Bibliotecarios> {
-    const bibliotecario = new this.bibliotecariosModel(bibliotecarioData);
-    return bibliotecario.save();
+    return this.bibliotecariosModel.create(bibliotecarioData);
   }
 
-  async update(bibliotecarioData: Bibliotecarios): Promise<Bibliotecarios> {
+  async update(bibliotecarioData: Partial<Bibliotecarios>): Promise<Bibliotecarios> {
     const bibliotecario = await this.findOne(
       bibliotecarioData.cod_bibliotecario,
     );

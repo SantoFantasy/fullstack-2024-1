@@ -27,8 +27,7 @@ export class CategoriasService {
   }
 
   async create(categoriaData: Partial<Categoria>): Promise<Categoria> {
-    const categoria = new this.categoriaModel(categoriaData);
-    return categoria.save();
+    return this.categoriaModel.create(categoriaData);
   }
 
   async update(categoriaUpdates: Partial<Categoria>): Promise<Categoria> {
