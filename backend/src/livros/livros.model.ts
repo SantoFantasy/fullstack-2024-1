@@ -7,68 +7,80 @@ import {
   Unique,
   NotNull,
   BelongsTo,
+  ForeignKey,
 } from 'sequelize-typescript';
 import { Categoria } from 'src/categorias/categorias.model';
+import { Usuario } from 'src/usuarios/usuarios.model';
 
 @Table
 export class Livro extends Model {
-  @Column
-  @PrimaryKey
-  @AutoIncrement
+  @Column({allowNull: false})
   cod_catalogacao: number;
-
-  @Column
+  
   @AutoIncrement
+  @PrimaryKey
   @Unique
   @NotNull
+  @Column({allowNull: false})
   cod_livro: number;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   titulo: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   nome_autores: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   ano_publicacao: number;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   cod_isbn: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   area: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   idioma: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   subarea: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   data_tombo: Date;
 
+  @ForeignKey(() => Categoria)
   @Column
-  @NotNull
-  @BelongsTo(() => Categoria)
   cod_categoria: number;
 
-  @Column
+  @BelongsTo(() => Categoria)
+  categoria: Categoria;
+
   @NotNull
+  @Column({allowNull: false})
   quantidade_paginas: number;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   classificacao: string;
 
-  @Column
   @NotNull
+  @Column({allowNull: false})
   cod_catalgogacao: number;
+
+  @BelongsTo(() => Usuario)
+  usuario: Usuario;
+
+  @ForeignKey(() => Usuario)
+  @Column
+  usuarioId: number;
 }
+
+

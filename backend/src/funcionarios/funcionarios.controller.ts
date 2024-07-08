@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body } from '@nestjs/common';
 import { FuncionariosService } from './funcionarios.service';
+import { Funcionario } from './funcionarios.model';
 
 @Controller('funcionarios')
 export class FuncionariosController {
@@ -21,12 +22,12 @@ export class FuncionariosController {
   }
 
   @Post('/create')
-  async create(funcionarioData: any) {
+  async create(@Body() funcionarioData: Partial<Funcionario>) {
     return this.funcionariosService.create(funcionarioData);
   }
 
-  @Put('/update')
-  async update(funcionarioData: any) {
+  @Put('/update/:cod_funcionario')
+  async update(@Body() funcionarioData: Funcionario) {
     return this.funcionariosService.update(funcionarioData);
   }
 }

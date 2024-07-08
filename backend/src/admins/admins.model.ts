@@ -7,7 +7,7 @@ import {
   NotNull,
 } from 'sequelize-typescript';
 
-@Table({ tableName: 'admin' })
+@Table
 export class Admin extends Model {
   @PrimaryKey
   @AutoIncrement
@@ -15,10 +15,10 @@ export class Admin extends Model {
   cod_admin!: number;
 
   @NotNull
-  @Column
+  @Column({allowNull: false})
   usuario!: string;
 
   @NotNull
-  @Column
+  @Column({allowNull: false})
   senha!: string;
 }

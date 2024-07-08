@@ -26,8 +26,8 @@ export class AdminsService {
     await admin.destroy();
   }
 
-  async update(cod_admin: number, adminUpdates: any): Promise<Admin> {
-    const admin = await this.findOne(cod_admin);
+  async update(adminUpdates: Admin): Promise<Admin> {
+    const admin = await this.findOne(adminUpdates.cod_admin);
     if (!admin) {
       // TODO: throw a custom exception
       // throw new NotFoundException(`Admin with cod_admin ${cod_admin} not found`);
@@ -36,7 +36,7 @@ export class AdminsService {
     }
   }
 
-  async create(adminData: any): Promise<Admin> {
+  async create(adminData: Partial<Admin>): Promise<Admin> {
     const admin = new this.adminModel(adminData);
     return admin.save();
   }

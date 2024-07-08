@@ -12,7 +12,7 @@ import {
   HasMany,
   DefaultScope,
   Scopes,
-  NotNull
+  NotNull,
 } from 'sequelize-typescript';
 
 // Modelo para Admin
@@ -24,11 +24,11 @@ class Admin extends Model {
   cod_admin!: number;
 
   @NotNull
-  @Column(DataType.STRING(50))
+  @Column({allowNull: false})(DataType.STRING(50))
   usuario!: string;
 
   @NotNull
-  @Column(DataType.STRING(50))
+  @Column({allowNull: false})(DataType.STRING(50))
   senha!: string;
 }
 
@@ -41,11 +41,11 @@ class Bibliotecarios extends Model {
   cod_bibliotecario!: number;
 
   @NotNull
-  @Column(DataType.STRING(50))
+  @Column({allowNull: false})(DataType.STRING(50))
   usuario!: string;
 
   @NotNull
-  @Column(DataType.STRING(50))
+  @Column({allowNull: false})(DataType.STRING(50))
   senha!: string;
 }
 
@@ -58,7 +58,7 @@ class Categorias extends Model {
   cod_categoria!: number;
 
   @NotNull
-  @Column(DataType.STRING(50))
+  @Column({allowNull: false})(DataType.STRING(50))
   categoria!: string;
 
   @HasMany(() => Livros)
@@ -79,7 +79,7 @@ class Livros extends Model {
   cod_livro!: number;
 
   @NotNull
-  @Column(DataType.STRING(255))
+  @Column({allowNull: false})(DataType.STRING(255))
   titulo!: string;
 
   // Adicione os demais campos seguindo o padrão acima

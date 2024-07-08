@@ -1,19 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Funcionarios } from './funcionarios.model';
+import { Funcionario } from './funcionarios.model';
 
 @Injectable()
 export class FuncionariosService {
   constructor(
-    @InjectModel(Funcionarios)
-    private funcionariosModel: typeof Funcionarios,
+    @InjectModel(Funcionario)
+    private funcionariosModel: typeof Funcionario,
   ) {}
 
-  async findAll(): Promise<Funcionarios[]> {
+  async findAll(): Promise<Funcionario[]> {
     return this.funcionariosModel.findAll();
   }
 
-  async findOne(cod_funcionario: number): Promise<Funcionarios> {
+  async findOne(cod_funcionario: number): Promise<Funcionario> {
     return this.funcionariosModel.findOne({
       where: {
         cod_funcionario,
@@ -26,12 +26,12 @@ export class FuncionariosService {
     await funcionario.destroy();
   }
 
-  async create(funcionarioData: any): Promise<Funcionarios> {
+  async create(funcionarioData: any): Promise<Funcionario> {
     const funcionario = new this.funcionariosModel(funcionarioData);
     return funcionario.save();
   }
 
-  async update(funcionarioData: any): Promise<Funcionarios> {
+  async update(funcionarioData: any): Promise<Funcionario> {
     const funcionario = await this.findOne(funcionarioData.cod_funcionario);
     if (!funcionario) {
       // TODO: throw a custom exception
