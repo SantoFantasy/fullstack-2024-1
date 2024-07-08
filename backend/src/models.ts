@@ -12,7 +12,7 @@ import {
   HasMany,
   DefaultScope,
   Scopes,
-  NotNull
+  NotNull,
 } from 'sequelize-typescript';
 
 // Modelo para Admin
