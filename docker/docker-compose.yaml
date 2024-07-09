@@ -2,7 +2,9 @@ services:
   postgres:
     image: postgres:16
     container_name: postgres_biblioteca
+    user: 1000:1000
     environment:
+      TZ: America/Sao_Paulo
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
@@ -10,6 +12,7 @@ services:
       - "5432:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - biblioteca-network
     healthcheck:
@@ -17,6 +20,7 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:latest
@@ -35,7 +39,7 @@ services:
       dockerfile: Dockerfile
     image: biblioteca_backend
     ports:
-      - "8080:3000"
+      - "3000:3000"
     depends_on:
       postgres:
         condition: service_healthy
