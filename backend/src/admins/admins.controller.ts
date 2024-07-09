@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { AdminsService } from './admins.service';
 import { Admin } from './admins.model';
 
@@ -12,12 +20,12 @@ export class AdminsController {
   }
 
   @Get('/:cod_admin')
-  async findOne(cod_admin: number) {
+  async findOne(@Param('cod_admin') cod_admin: number) {
     return this.adminsService.findOne(cod_admin);
   }
 
   @Delete('/remove/:cod_admin')
-  async remove(cod_admin: number) {
+  async remove(@Param('cod_admin') cod_admin: number) {
     return this.adminsService.remove(cod_admin);
   }
 
@@ -27,7 +35,7 @@ export class AdminsController {
   }
 
   @Put('/update/:cod_admin')
-  async update(@Body() adminData: Admin) {
+  async update(@Param('cod_admin') @Body() adminData: Admin) {
     return this.adminsService.update(adminData);
   }
 }
