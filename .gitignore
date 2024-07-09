@@ -145,4 +145,3 @@ dist
 
 ## Docker compose files
 docker/postgres-data/*
-!docker/postgres-data/.gitkeep

@@ -1,8 +1,7 @@
 services:
-  postgres:
+  postgres_biblioteca:
     image: postgres:16
     container_name: postgres_biblioteca
-    user: 1000:1000
     environment:
       TZ: America/Sao_Paulo
       POSTGRES_USER: postgres
@@ -21,12 +20,16 @@ services:
       timeout: 3s
       retries: 3
 
-  pgadmin:
-    container_name: pgadmin
+  pgadmin_biblioteca:
+    container_name: pgadmin_biblioteca
     image: dpage/pgadmin4:latest
     environment:
       PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
       PGADMIN_DEFAULT_PASSWORD: postgres
+      UID: 1000
+      
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
     ports:
       - "5050:80"
     networks:
@@ -41,7 +44,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      postgres:
+      postgres_biblioteca:
         condition: service_healthy
     environment:
       DB_HOST: postgres_biblioteca

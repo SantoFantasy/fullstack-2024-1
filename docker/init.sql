@@ -1,1 +1,1 @@
-CREATE DATABASE 'biblioteca';
+CREATE DATABASE "biblioteca";
