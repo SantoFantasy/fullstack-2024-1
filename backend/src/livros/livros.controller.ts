@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { LivrosService } from './livros.service';
 import { Livro } from './livros.model';
 
@@ -22,7 +30,7 @@ export class LivrosController {
   }
 
   @Put('/update/:isbn')
-  async update(@Param('isbn') isbn:string, @Body() livroUpdates: Livro) {
+  async update(@Param('isbn') isbn: string, @Body() livroUpdates: Livro) {
     return this.livrosService.update(isbn, livroUpdates);
   }
 

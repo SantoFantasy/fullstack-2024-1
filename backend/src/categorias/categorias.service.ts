@@ -30,7 +30,10 @@ export class CategoriasService {
     return this.categoriaModel.create(categoriaData);
   }
 
-  async update(cod_categoria:number, categoriaUpdates: Partial<Categoria>): Promise<Categoria> {
+  async update(
+    cod_categoria: number,
+    categoriaUpdates: Partial<Categoria>,
+  ): Promise<Categoria> {
     const categoria = await this.findOne(cod_categoria);
     if (!categoria) {
       // TODO: throw a custom exception

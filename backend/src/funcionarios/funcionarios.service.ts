@@ -30,7 +30,10 @@ export class FuncionariosService {
     return this.funcionariosModel.create(funcionarioData);
   }
 
-  async update(cod_funcionario: number, funcionarioData: Partial<Funcionario>): Promise<Funcionario> {
+  async update(
+    cod_funcionario: number,
+    funcionarioData: Partial<Funcionario>,
+  ): Promise<Funcionario> {
     const funcionario = await this.findOne(cod_funcionario);
     if (!funcionario) {
       // TODO: throw a custom exception

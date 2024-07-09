@@ -36,9 +36,7 @@ export class BibliotecariosService {
     cod_bibliotecario: number,
     bibliotecarioData: Partial<Bibliotecarios>,
   ): Promise<Bibliotecarios> {
-    const bibliotecario = await this.findOne(
-      cod_bibliotecario,
-    );
+    const bibliotecario = await this.findOne(cod_bibliotecario);
     if (!bibliotecario) {
       // TODO: throw a custom exception
     } else {

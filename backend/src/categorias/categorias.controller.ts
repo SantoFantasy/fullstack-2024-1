@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CategoriasService } from './categorias.service';
 import { Categoria } from './categorias.model';
 
@@ -27,7 +35,10 @@ export class CategoriasController {
   }
 
   @Put('/update/:cod_categoria')
-  async update(@Param('cod_categoria') cod_categoria: number, @Body() categoriaUpdates: Categoria) {
+  async update(
+    @Param('cod_categoria') cod_categoria: number,
+    @Body() categoriaUpdates: Categoria,
+  ) {
     return this.categoriasService.update(cod_categoria, categoriaUpdates);
   }
 }

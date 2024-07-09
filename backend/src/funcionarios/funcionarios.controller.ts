@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { FuncionariosService } from './funcionarios.service';
 import { Funcionario } from './funcionarios.model';
 
@@ -27,7 +35,10 @@ export class FuncionariosController {
   }
 
   @Put('/update/:cod_funcionario')
-  async update(@Param('cod_funcionario') cod_funcionario:number, @Body() funcionarioData: Funcionario) {
+  async update(
+    @Param('cod_funcionario') cod_funcionario: number,
+    @Body() funcionarioData: Funcionario,
+  ) {
     return this.funcionariosService.update(cod_funcionario, funcionarioData);
   }
 }

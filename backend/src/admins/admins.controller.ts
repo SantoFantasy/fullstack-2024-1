@@ -35,7 +35,10 @@ export class AdminsController {
   }
 
   @Put('/update/:cod_admin')
-  async update(@Param('cod_admin') cod_admin: number, @Body() adminData: Admin) {
+  async update(
+    @Param('cod_admin') cod_admin: number,
+    @Body() adminData: Admin,
+  ) {
     return this.adminsService.update(cod_admin, adminData);
   }
 }

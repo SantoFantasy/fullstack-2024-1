@@ -1,4 +1,12 @@
-import { Controller, Delete, Post, Get, Put, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  Post,
+  Get,
+  Put,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { BibliotecariosService } from './bibliotecarios.service';
 import { Bibliotecarios } from './biblitecarios.model';
 
@@ -27,7 +35,13 @@ export class BibliotecariosController {
   }
 
   @Put('/update/:cod_bibliotecario')
-  async update(@Param('cod_bibliotecario') cod_bibliotecario: number, @Body() bibliotecarioUpdates: Bibliotecarios) {
-    return this.bibliotecariosService.update(cod_bibliotecario, bibliotecarioUpdates);
+  async update(
+    @Param('cod_bibliotecario') cod_bibliotecario: number,
+    @Body() bibliotecarioUpdates: Bibliotecarios,
+  ) {
+    return this.bibliotecariosService.update(
+      cod_bibliotecario,
+      bibliotecarioUpdates,
+    );
   }
 }
