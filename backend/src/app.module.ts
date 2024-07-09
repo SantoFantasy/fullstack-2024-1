@@ -32,7 +32,7 @@ dotenv.config();
       database: process.env.DB_NAME || 'biblioteca',
       models: [Livro, Categoria, Usuario, Admin, Bibliotecarios, Funcionario],
       autoLoadModels: true,
-      sync: { force: true },
+      sync: { force: false },
     }),
     CategoriasModule,
     LivrosModule,

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CategoriasService } from './categorias.service';
 import { Categoria } from './categorias.model';
 
@@ -12,12 +12,12 @@ export class CategoriasController {
   }
 
   @Get('/:cod_categoria')
-  async findOne(cod_categoria: number) {
+  async findOne(@Param('cod_categoria') cod_categoria: number) {
     return this.categoriasService.findOne(cod_categoria);
   }
 
   @Delete('/remove/:cod_categoria')
-  async remove(cod_categoria: number) {
+  async remove(@Param('cod_categoria') cod_categoria: number) {
     return this.categoriasService.remove(cod_categoria);
   }
 
@@ -27,7 +27,7 @@ export class CategoriasController {
   }
 
   @Put('/update/:cod_categoria')
-  async update(@Body() categoriaUpdates: Categoria) {
-    return this.categoriasService.update(categoriaUpdates);
+  async update(@Param('cod_categoria') cod_categoria: number, @Body() categoriaUpdates: Categoria) {
+    return this.categoriasService.update(cod_categoria, categoriaUpdates);
   }
 }

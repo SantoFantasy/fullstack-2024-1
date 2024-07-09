@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { LivrosService } from './livros.service';
 import { Livro } from './livros.model';
 
@@ -12,18 +12,18 @@ export class LivrosController {
   }
 
   @Get('/:isbn')
-  async findOne(isbn: string) {
+  async findOne(@Param('isbn') isbn: string) {
     return this.livrosService.findOne(isbn);
   }
 
   @Delete('/remove/:isbn')
-  async remove(isbn: string) {
+  async remove(@Param('isbn') isbn: string) {
     return this.livrosService.remove(isbn);
   }
 
   @Put('/update/:isbn')
-  async update(@Body() livroUpdates: Livro) {
-    return this.livrosService.update(livroUpdates);
+  async update(@Param('isbn') isbn:string, @Body() livroUpdates: Livro) {
+    return this.livrosService.update(isbn, livroUpdates);
   }
 
   @Post('/create')

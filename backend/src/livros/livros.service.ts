@@ -30,8 +30,8 @@ export class LivrosService {
     return this.livroModel.create(livroData);
   }
 
-  async update(livroUpdates: Livro): Promise<Livro> {
-    const livro = await this.findOne(livroUpdates.cod_isbn);
+  async update(cod_isbn: string, livroUpdates: Partial<Livro>): Promise<Livro> {
+    const livro = await this.findOne(cod_isbn);
     if (!livro) {
       // TODO: throw a custom exception
     } else {

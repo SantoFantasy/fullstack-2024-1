@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { FuncionariosService } from './funcionarios.service';
 import { Funcionario } from './funcionarios.model';
 
@@ -12,12 +12,12 @@ export class FuncionariosController {
   }
 
   @Get('/:cod_funcionario')
-  async findOne(cod_funcionario: number) {
+  async findOne(@Param('cod_funcionario') cod_funcionario: number) {
     return this.funcionariosService.findOne(cod_funcionario);
   }
 
   @Delete('/remove/:cod_funcionario')
-  async remove(cod_funcionario: number) {
+  async remove(@Param('cod_funcionario') cod_funcionario: number) {
     return this.funcionariosService.remove(cod_funcionario);
   }
 
@@ -27,7 +27,7 @@ export class FuncionariosController {
   }
 
   @Put('/update/:cod_funcionario')
-  async update(@Body() funcionarioData: Funcionario) {
-    return this.funcionariosService.update(funcionarioData);
+  async update(@Param('cod_funcionario') cod_funcionario:number, @Body() funcionarioData: Funcionario) {
+    return this.funcionariosService.update(cod_funcionario, funcionarioData);
   }
 }

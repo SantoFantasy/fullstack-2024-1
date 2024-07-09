@@ -33,10 +33,11 @@ export class BibliotecariosService {
   }
 
   async update(
+    cod_bibliotecario: number,
     bibliotecarioData: Partial<Bibliotecarios>,
   ): Promise<Bibliotecarios> {
     const bibliotecario = await this.findOne(
-      bibliotecarioData.cod_bibliotecario,
+      cod_bibliotecario,
     );
     if (!bibliotecario) {
       // TODO: throw a custom exception

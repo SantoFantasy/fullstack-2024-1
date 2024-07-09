@@ -38,8 +38,8 @@ export class UsuariosService {
     return this.usuarioModel.create(usuarioData);
   }
 
-  async update(usuarioUpdates: Usuario): Promise<Usuario> {
-    const usuario = await this.findOne(usuarioUpdates.cod_usuario);
+  async update(cod_usuario: number, usuarioUpdates: Partial<Usuario>): Promise<Usuario> {
+    const usuario = await this.findOne(cod_usuario);
     if (!usuario) {
       // TODO: throw a custom exception
     } else {
