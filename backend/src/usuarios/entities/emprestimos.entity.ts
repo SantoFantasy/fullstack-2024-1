@@ -32,5 +32,4 @@ export class Emprestimo extends Model {
 
   @Column({ allowNull: true, type: DataType.DATE })
   data_devolucao: Date;
-
 }

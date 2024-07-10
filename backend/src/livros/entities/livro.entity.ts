@@ -9,7 +9,6 @@ import {
   BelongsToMany,
   BelongsTo,
   NotNull,
-  ForeignKey,
 } from 'sequelize-typescript';
 import { Autor } from 'src/autores/entities/autor.entity';
 import { Livros_Autores } from 'src/autores/entities/livros-autores.entity';
