@@ -1,41 +1,47 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
-  Param,
   Post,
-  Put,
+  Body,
+  Patch,
+  Param,
+  Delete,
 } from '@nestjs/common';
 import { LivrosService } from './livros.service';
-import { Livro } from './livros.model';
+import { CreateLivroDto } from './dto/create-livro.dto';
+import { UpdateLivroDto } from './dto/update-livro.dto';
 
 @Controller('livros')
 export class LivrosController {
-  constructor(private livrosService: LivrosService) {}
+  constructor(private readonly livrosService: LivrosService) {}
+
+  @Post()
+  create(@Body() createLivroDto: CreateLivroDto) {
+    return this.livrosService.create(createLivroDto);
+  }
 
   @Get()
-  async findAll() {
+  findAll() {
     return this.livrosService.findAll();
   }
 
-  @Get('/:isbn')
-  async findOne(@Param('isbn') isbn: string) {
-    return this.livrosService.findOne(isbn);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.livrosService.findOneById(+id);
   }
 
-  @Delete('/remove/:isbn')
-  async remove(@Param('isbn') isbn: string) {
-    return this.livrosService.remove(isbn);
+  @Get(':isbn')
+  findOneByIsbn(@Param('isbn') isbn: string) {
+    return this.livrosService.findOneByIsbn(+isbn);
   }
 
-  @Put('/update/:isbn')
-  async update(@Param('isbn') isbn: string, @Body() livroUpdates: Livro) {
-    return this.livrosService.update(isbn, livroUpdates);
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateLivroDto: UpdateLivroDto) {
+    return this.livrosService.update(+id, updateLivroDto);
   }
 
-  @Post('/create')
-  async create(@Body() livroData: Livro) {
-    return this.livrosService.create(livroData);
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.livrosService.remove(+id);
   }
 }

@@ -1,44 +1,42 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
-  Param,
   Post,
-  Put,
+  Body,
+  Patch,
+  Param,
+  Delete,
 } from '@nestjs/common';
-import { Usuario } from './usuarios.model';
 import { UsuariosService } from './usuarios.service';
+import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
-  constructor(private usuariosService: UsuariosService) {}
+  constructor(private readonly usuariosService: UsuariosService) {}
+
+  @Post()
+  create(@Body() createUsuarioDto: CreateUsuarioDto) {
+    return this.usuariosService.create(createUsuarioDto);
+  }
 
   @Get()
-  async findAll() {
+  findAll() {
     return this.usuariosService.findAll();
   }
 
-  @Get('/:cod_usuario')
-  async findOne(@Param('cod_usuario') cod_usuario: number) {
-    return this.usuariosService.findOne(cod_usuario);
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.usuariosService.findOne(+id);
   }
 
-  @Delete('/remove/:cod_usuario')
-  async remove(@Param('cod_usuario') cod_usuario: number) {
-    return this.usuariosService.remove(cod_usuario);
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    return this.usuariosService.update(+id, updateUsuarioDto);
   }
 
-  @Put('/update/:cod_usuario')
-  async update(
-    @Param('cod_usuario') cod_usuario: number,
-    @Body() usuarioUpdates: Usuario,
-  ) {
-    return this.usuariosService.update(cod_usuario, usuarioUpdates);
-  }
-
-  @Post('/create')
-  async create(@Body() usuariosData: Usuario) {
-    return this.usuariosService.create(usuariosData);
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.usuariosService.remove(+id);
   }
 }
