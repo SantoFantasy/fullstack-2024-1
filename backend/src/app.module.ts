@@ -10,6 +10,9 @@ import { Autor } from './autores/entities/autor.entity';
 import { LivrosModule } from './livros/livros.module';
 import { Livro } from './livros/entities/livro.entity';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { Livros_Autores } from './autores/entities/livros-autores.entity';
+import { Emprestimo } from './usuarios/entities/emprestimos.entity';
+import { Usuario } from './usuarios/entities/usuario.entity';
 dotenv.config();
 
 @Module({
@@ -21,7 +24,7 @@ dotenv.config();
       username: process.env.DB_USER || 'postgres',
       password: process.env.DB_PASS || 'postgres',
       database: process.env.DB_NAME || 'biblioteca',
-      models: [Editora, Autor, Livro],
+      models: [Editora, Autor, Livro, Livros_Autores, Emprestimo, Usuario],
       autoLoadModels: true,
       sync: { force: false },
     }),

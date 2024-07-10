@@ -10,5 +10,5 @@ export class Livros_Autores extends Model {
 
   @ForeignKey(() => Autor)
   @Column
-  id: number;
+  id_autor: number;
 }

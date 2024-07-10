@@ -9,6 +9,7 @@ import {
   BelongsToMany,
   BelongsTo,
   NotNull,
+  ForeignKey,
 } from 'sequelize-typescript';
 import { Autor } from 'src/autores/entities/autor.entity';
 import { Livros_Autores } from 'src/autores/entities/livros-autores.entity';
@@ -29,12 +30,10 @@ export class Livro extends Model {
   @Column({ allowNull: false, type: DataType.STRING(255) })
   titulo: string;
 
-  @NotNull
-  @BelongsToMany(() => Autor, () => Livros_Autores)
+  @BelongsToMany(() => Autor, () => Livros_Autores, 'id_autor', 'cod_isbn')
   autores: Autor[];
 
-  @NotNull
-  @BelongsTo(() => Editora)
+  @BelongsTo(() => Editora, 'id_editora')
   editora: Editora;
 
   @NotNull

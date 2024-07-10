@@ -12,7 +12,7 @@ export class Autor extends Model {
   @AutoIncrement
   @PrimaryKey
   @Column
-  id: number;
+  id_autor: number;
 
   @Column({ allowNull: false, type: DataType.STRING(50) })
   nome: string;
