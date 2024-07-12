@@ -1,50 +1,63 @@
 import { Injectable } from '@nestjs/common';
+import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Usuario } from './usuarios.model';
+import { Usuario } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuariosService {
   constructor(
     @InjectModel(Usuario)
-    private usuarioModel: typeof Usuario,
+    private usuariosModel: typeof Usuario,
   ) {}
 
-  async findAll(): Promise<Usuario[]> {
-    return this.usuarioModel.findAll();
-  }
-
-  findOne(cod_usuario: number): Promise<Usuario> {
-    return this.usuarioModel.findOne({
-      where: {
-        cod_usuario,
-      },
+  async create(createUsuarioDto: CreateUsuarioDto) {
+    return this.usuariosModel.create({
+      nome: createUsuarioDto.nome,
+      cpf: createUsuarioDto.cpf,
+      data_nascimento: createUsuarioDto.data_nascimento,
+      sexo: createUsuarioDto.sexo,
+      endereco: createUsuarioDto.endereco,
+      bairro: createUsuarioDto.bairro,
+      cidade: createUsuarioDto.cidade,
+      cep: createUsuarioDto.cep,
+      telefone: createUsuarioDto.telefone,
+      email: createUsuarioDto.email,
+      func_status: createUsuarioDto.func_status,
     });
   }
 
-  findAllByName(nome: string): Promise<Usuario[]> {
-    return this.usuarioModel.findAll({
-      where: {
-        nome,
-      },
-    });
+  async findAll() {
+    return this.usuariosModel.findAll();
   }
 
-  async remove(cod_usuario: number): Promise<void> {
-    const usuario = await this.findOne(cod_usuario);
-    await usuario.destroy();
+  async findOne(id: number) {
+    return this.usuariosModel.findByPk(id);
   }
 
-  async create(usuarioData: Partial<Usuario>): Promise<Usuario> {
-    const usuario = new this.usuarioModel(usuarioData);
-    return usuario.save();
-  }
-
-  async update(usuarioUpdates: Usuario): Promise<Usuario> {
-    const usuario = await this.findOne(usuarioUpdates.cod_usuario);
+  async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
+    const usuario = await this.usuariosModel.findByPk(id);
     if (!usuario) {
-      // TODO: throw a custom exception
     } else {
-      return usuario.update(usuarioUpdates);
+      return usuario.update({
+        nome: updateUsuarioDto.nome,
+        cpf: updateUsuarioDto.cpf,
+        data_nascimento: updateUsuarioDto.data_nascimento,
+        sexo: updateUsuarioDto.sexo,
+        endereco: updateUsuarioDto.endereco,
+        bairro: updateUsuarioDto.bairro,
+        cidade: updateUsuarioDto.cidade,
+        cep: updateUsuarioDto.cep,
+        telefone: updateUsuarioDto.telefone,
+        email: updateUsuarioDto.email,
+        func_status: updateUsuarioDto.func_status,
+        admin_status: updateUsuarioDto.admin_status,
+        senha: updateUsuarioDto.senha,
+      });
     }
+  }
+
+  async remove(id: number) {
+    return `This action removes a #${id} usuario`;
   }
 }

@@ -7,10 +7,11 @@ RUN npm ci
 FROM baseimg as builder
 WORKDIR /app
 COPY --from=baseimg /app/ /app
-COPY src/ /app/
+COPY src/ ./src
 RUN npm run build
 
 FROM baseimg 
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
+EXPOSE 3000
 CMD ["npm", "run", "start:prod"]
