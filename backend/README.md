@@ -25,7 +25,7 @@ npm run docker:run
 Para finalizar:
 
 ```bash
-npm run docker:stop'
+npm run docker:stop
 ```
 
 ### Inicializando sem o docker
@@ -33,7 +33,14 @@ npm run docker:stop'
 Garanta que o banco postgres esteja disponível e configurado corretamente, após isso, acesse a pasta [../backend](../backend/) execute os comandos:
 
 ```bash
+npm run start
+```
 
+Ou compile o projeto e incie com:
+
+```bash
+npm run build
+npm run start:prod
 ```
 
 ## Informações úteis
