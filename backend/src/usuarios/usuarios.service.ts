@@ -3,6 +3,7 @@ import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Usuario } from './entities/usuario.entity';
+import { Op, WhereOptions } from 'sequelize';
 
 @Injectable()
 export class UsuariosService {
@@ -27,8 +28,19 @@ export class UsuariosService {
     });
   }
 
-  async findAll() {
-    return this.usuariosModel.findAll();
+  async findAll(usuario: Partial<Usuario>, page: number, limit: number) {
+    const attributes: WhereOptions<any>    = {};
+    if (usuario.nome) attributes.nome = { [Op.like]: attributes.nome };
+    if (usuario.admin_status) attributes.admin_status = attributes.admin_status;
+    if (usuario.func_status) attributes.func_status = attributes.func_status;
+    if (usuario.cidade) attributes.cidade = { [Op.like]: attributes.cidade };
+    if (usuario.sexo) attributes.sexo = attributes.sexo;
+
+    return this.usuariosModel.findAll({
+      where: attributes,
+      limit: limit,
+      offset: (page + 1) * limit,
+    });
   }
 
   async findOne(id: number) {

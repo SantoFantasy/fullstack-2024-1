@@ -1,4 +1,4 @@
-export class CreateAutoreDto {
+export class CreateAutorDto {
   id: number;
   nome: string;
   data_nascimento: string;
