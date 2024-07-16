@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAutoreDto } from './dto/create-autor.dto';
+import { CreateAutorDto } from './dto/create-autor.dto';
 import { UpdateAutoreDto } from './dto/update-autor.dto';
 import { Autor } from './entities/autor.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { Op, WhereOptions } from 'sequelize';
 
 @Injectable()
 export class AutoresService {
@@ -11,17 +12,25 @@ export class AutoresService {
     private autoresModel: typeof Autor,
   ) {}
 
-  async create(createAutoreDto: CreateAutoreDto) {
+  async create(createAutorDto: CreateAutorDto) {
     return this.autoresModel.create({
-      nome: createAutoreDto.nome,
-      data_nascimento: createAutoreDto.data_nascimento,
-      nacionalidade: createAutoreDto.nacionalidade,
-      biografia: createAutoreDto.biografia,
+      nome: createAutorDto.nome,
+      data_nascimento: createAutorDto.data_nascimento,
+      nacionalidade: createAutorDto.nacionalidade,
+      biografia: createAutorDto.biografia,
     });
   }
 
-  async findAll() {
-    return this.autoresModel.findAll();
+  async findAll(autor: Partial<Autor>, page: number, limit: number) {
+    const attributes: WhereOptions<any>    = {};
+    if (autor.nome) attributes.nome = { [Op.like]: attributes.nome }
+    if (autor.nacionalidade) attributes.nacionalidade = autor.nacionalidade
+
+    return this.autoresModel.findAll({
+      where: attributes,
+      limit: limit,
+      offset: (page + 1) * limit
+    });
   }
 
   async findOne(id: number) {

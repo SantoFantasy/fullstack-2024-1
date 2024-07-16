@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { LivrosService } from './livros.service';
 import { CreateLivroDto } from './dto/create-livro.dto';
 import { UpdateLivroDto } from './dto/update-livro.dto';
+import { SearchLivro } from './dto/search-livro.dto';
 
 @Controller('livros')
 export class LivrosController {
@@ -21,8 +23,8 @@ export class LivrosController {
   }
 
   @Get()
-  findAll() {
-    return this.livrosService.findAll();
+  findAll(@Query() params: SearchLivro) {
+    return this.livrosService.findAll(params.livro(), params.page, params.size);
   }
 
   @Get(':id')

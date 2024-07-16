@@ -3,6 +3,7 @@ import { CreateEditoraDto } from './dto/create-editora.dto';
 import { UpdateEditoraDto } from './dto/update-editora.dto';
 import { Editora } from './entities/editora.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { Op, WhereOptions } from 'sequelize';
 
 @Injectable()
 export class EditorasService {
@@ -22,8 +23,16 @@ export class EditorasService {
     });
   }
 
-  async findAll() {
-    return this.editoraModel.findAll();
+  async findAll(editora: Partial<Editora>, page: number, limit: number) {
+    const attributes: WhereOptions<any>    = {};
+    if (editora.nome) attributes.nome = { [Op.like]: attributes.nome }
+    if (editora.cidade) attributes.cidade = { [Op.like]: attributes.cidade}
+
+    return this.editoraModel.findAll({
+      where: attributes,
+      limit: limit,
+      offset: (page + 1) * limit
+    });
   }
 
   async findOne(id: number) {

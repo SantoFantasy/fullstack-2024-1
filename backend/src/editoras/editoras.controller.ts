@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { EditorasService } from './editoras.service';
 import { CreateEditoraDto } from './dto/create-editora.dto';
 import { UpdateEditoraDto } from './dto/update-editora.dto';
+import { SearchEditora } from './dto/search-editora.dto';
 
 @Controller('editoras')
 export class EditorasController {
@@ -21,8 +23,8 @@ export class EditorasController {
   }
 
   @Get()
-  findAll() {
-    return this.editorasService.findAll();
+  findAll(@Query() params: SearchEditora ) {
+    return this.editorasService.findAll(params.editora(), params.page, params.size);
   }
 
   @Get(':id')

@@ -6,23 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { AutoresService } from './autores.service';
-import { CreateAutoreDto } from './dto/create-autor.dto';
+import { CreateAutorDto } from './dto/create-autor.dto';
 import { UpdateAutoreDto } from './dto/update-autor.dto';
+import { SearchAutor } from './dto/search-autor.dto';
 
 @Controller('autores')
 export class AutoresController {
   constructor(private readonly autoresService: AutoresService) {}
 
   @Post()
-  create(@Body() createAutoreDto: CreateAutoreDto) {
+  create(@Body() createAutoreDto: CreateAutorDto) {
     return this.autoresService.create(createAutoreDto);
   }
 
   @Get()
-  findAll() {
-    return this.autoresService.findAll();
+  findAll(@Query() params: SearchAutor) {
+    return this.autoresService.findAll(params.autor(), params.page, params.size);
   }
 
   @Get(':id')
