@@ -24,7 +24,11 @@ export class UsuariosController {
 
   @Get()
   findAll(@Query() params: SearchUsuario) {
-    return this.usuariosService.findAll(params.usuario(), params.page, params.size);
+    return this.usuariosService.findAll(
+      params.usuario(),
+      params.page,
+      params.size,
+    );
   }
 
   @Get(':id')

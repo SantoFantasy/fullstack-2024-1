@@ -1,4 +1,8 @@
+import { Type } from "class-transformer";
+
 export class Pageable {
-    page: number = 0;
-    size: number = 10;
+  @Type(() => Number)
+  size: number = 10;
+  @Type(() => Number)
+  page: number = 0;
 }

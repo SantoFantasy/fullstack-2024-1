@@ -29,12 +29,12 @@ export class UsuariosService {
   }
 
   async findAll(usuario: Partial<Usuario>, page: number, limit: number) {
-    const attributes: WhereOptions<any>    = {};
-    if (usuario.nome) attributes.nome = { [Op.like]: attributes.nome };
-    if (usuario.admin_status) attributes.admin_status = attributes.admin_status;
-    if (usuario.func_status) attributes.func_status = attributes.func_status;
-    if (usuario.cidade) attributes.cidade = { [Op.like]: attributes.cidade };
-    if (usuario.sexo) attributes.sexo = attributes.sexo;
+    const attributes: WhereOptions<any> = {};
+    if (usuario.nome) attributes.nome = { [Op.like]: usuario.nome };
+    if (usuario.admin_status) attributes.admin_status = usuario.admin_status;
+    if (usuario.func_status) attributes.func_status = usuario.func_status;
+    if (usuario.cidade) attributes.cidade = { [Op.like]: usuario.cidade };
+    if (usuario.sexo) attributes.sexo = usuario.sexo;
 
     return this.usuariosModel.findAll({
       where: attributes,

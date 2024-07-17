@@ -27,25 +27,17 @@ export class LivrosService {
   }
 
   async findAll(livro: Partial<Livro>, page: number, limit: number) {
-    const attributes: WhereOptions<any>    = {};;
+    const attributes: WhereOptions<any> = {};
     if (livro.titulo) attributes.titulo = livro.titulo;
     if (livro.qtd_copias) attributes.qtd_copias = livro.qtd_copias;
     if (livro.qtd_paginas) attributes.qtd_paginas = livro.qtd_paginas;
     if (livro.cdd) attributes.cdd = livro.cdd;
     if (livro.ano_publicacao) attributes.ano_publicacao = livro.ano_publicacao;
-    return this.livrosModel.findAll(
-      {
-        where: {
-          titulo: {[Op.like]: attributes.titulo},
-          qtd_copias: {[Op.gt]: attributes.qtd_copias},
-          qtd_paginas: {[Op.gt]: attributes.qtd_paginas},
-          cdd: attributes.cdd,
-          ano_publicacao: attributes.ano_publicacao,
-        },
-        limit: limit,
-        offset: (page + 1) * limit,
-      },
-    );
+    return this.livrosModel.findAll({
+      where: attributes,
+      limit: limit,
+      offset: (page + 1) * limit,
+    });
   }
 
   async findOneById(id: number) {
