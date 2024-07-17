@@ -24,7 +24,11 @@ export class AutoresController {
 
   @Get()
   findAll(@Query() params: SearchAutor) {
-    return this.autoresService.findAll(params.autor(), params.page, params.size);
+    return this.autoresService.findAll(
+      params.autor(),
+      params.page,
+      params.size,
+    );
   }
 
   @Get(':id')

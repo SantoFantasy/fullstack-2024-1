@@ -22,14 +22,14 @@ export class AutoresService {
   }
 
   async findAll(autor: Partial<Autor>, page: number, limit: number) {
-    const attributes: WhereOptions<any>    = {};
-    if (autor.nome) attributes.nome = { [Op.like]: attributes.nome }
-    if (autor.nacionalidade) attributes.nacionalidade = autor.nacionalidade
+    const attributes: WhereOptions<any> = {};
+    if (autor.nome) attributes.nome = { [Op.like]: autor.nome };
+    if (autor.nacionalidade) attributes.nacionalidade = autor.nacionalidade;
 
     return this.autoresModel.findAll({
       where: attributes,
       limit: limit,
-      offset: (page + 1) * limit
+      offset: (page + 1) * limit,
     });
   }
 

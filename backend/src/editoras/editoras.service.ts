@@ -24,14 +24,14 @@ export class EditorasService {
   }
 
   async findAll(editora: Partial<Editora>, page: number, limit: number) {
-    const attributes: WhereOptions<any>    = {};
-    if (editora.nome) attributes.nome = { [Op.like]: attributes.nome }
-    if (editora.cidade) attributes.cidade = { [Op.like]: attributes.cidade}
+    const attributes: WhereOptions<any> = {};
+    if (editora.nome) attributes.nome = { [Op.like]: editora.nome };
+    if (editora.cidade) attributes.cidade = { [Op.like]: editora.cidade };
 
     return this.editoraModel.findAll({
       where: attributes,
       limit: limit,
-      offset: (page + 1) * limit
+      offset: (page + 1) * limit,
     });
   }
 

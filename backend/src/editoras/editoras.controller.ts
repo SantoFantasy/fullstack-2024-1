@@ -23,8 +23,12 @@ export class EditorasController {
   }
 
   @Get()
-  findAll(@Query() params: SearchEditora ) {
-    return this.editorasService.findAll(params.editora(), params.page, params.size);
+  findAll(@Query() params: SearchEditora) {
+    return this.editorasService.findAll(
+      params.editora(),
+      params.page,
+      params.size,
+    );
   }
 
   @Get(':id')

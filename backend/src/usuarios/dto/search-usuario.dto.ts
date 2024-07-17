@@ -1,7 +1,7 @@
-import { Pageable } from "src/dto/pageable.dto";
-import { Usuario } from "../entities/usuario.entity";
+import { Pageable } from 'src/dto/pageable.dto';
+import { Usuario } from '../entities/usuario.entity';
 
-export class SearchUsuario extends Pageable{
+export class SearchUsuario extends Pageable {
   nome: string;
   admin_status: boolean;
   func_status: boolean;
@@ -14,7 +14,7 @@ export class SearchUsuario extends Pageable{
       admin_status: this.admin_status,
       func_status: this.func_status,
       cidade: this.cidade,
-      sexo: this.sexo
-    }
+      sexo: this.sexo,
+    };
   }
 }
