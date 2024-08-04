@@ -25,6 +25,9 @@ export class UsuariosService {
       telefone: createUsuarioDto.telefone,
       email: createUsuarioDto.email,
       func_status: createUsuarioDto.func_status,
+      admin_status: createUsuarioDto.admin_status,
+      usuario: createUsuarioDto.usuario,
+      senha: createUsuarioDto.senha,
     });
   }
 
@@ -39,7 +42,7 @@ export class UsuariosService {
     return this.usuariosModel.findAll({
       where: attributes,
       limit: limit,
-      offset: (page + 1) * limit,
+      offset: (page) * limit,
     });
   }
 

@@ -31,7 +31,7 @@ export class EditorasService {
     return this.editoraModel.findAll({
       where: attributes,
       limit: limit,
-      offset: (page + 1) * limit,
+      offset: (page) * limit,
     });
   }
 

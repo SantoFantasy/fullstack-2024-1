@@ -32,17 +32,17 @@ export class EditorasController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.editorasService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.editorasService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEditoraDto: UpdateEditoraDto) {
-    return this.editorasService.update(+id, updateEditoraDto);
+  update(@Param('id') id: number, @Body() updateEditoraDto: UpdateEditoraDto) {
+    return this.editorasService.update(id, updateEditoraDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.editorasService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.editorasService.remove(id);
   }
 }
