@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
+ARG REACT_APP_BACKEND_URL=http://localhost:3000
 FROM baseimg AS builder
 WORKDIR /app
 COPY --from=baseimg /app/node_modules /app

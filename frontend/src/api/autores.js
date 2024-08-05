@@ -1,14 +1,14 @@
 import { useQuery, useMutation } from "react-query";
-import axios from "axios";
+import apiClient from "./client";
 import { queryClient } from "../components/App";
 
 const fetchAutores = async () => {
-  const { data } = await axios.get(`http://localhost:3000/autores`);
+  const { data } = await apiClient.get(`/autores`);
   return data;
 };
 
 const fetchAutorById = async (id) => {
-  const { data } = await axios.get(`http://localhost:3000/autores/${id}`);
+  const { data } = await apiClient.get(`/autores/${id}`);
   return data;
 };
 
@@ -25,7 +25,7 @@ export const useGetAutor = (id, onSuccess) => {
 };
 
 export const useCreateAutor = (onSuccess, onError) =>{
-  return useMutation(autor => axios.post("http://localhost:3000/autores", autor), {
+  return useMutation(autor => apiClient.post("/autores", autor), {
     onSuccess: data => {
       onSuccess(data);
       queryClient.refetchQueries(['autores'])
@@ -35,7 +35,7 @@ export const useCreateAutor = (onSuccess, onError) =>{
 }
 
 export const useEditAutor = (onSuccess, onError) => {
-  return useMutation(autor => axios.patch(`http://localhost:3000/autores/${autor.id_autor}`, autor),
+  return useMutation(autor => apiClient.patch(`/autores/${autor.id_autor}`, autor),
     {
       onSuccess: data => {
         onSuccess(data);
@@ -47,7 +47,7 @@ export const useEditAutor = (onSuccess, onError) => {
 }
 
 export const useDeleteAutor = (onError) => {
-  return useMutation(id_autor => axios.delete(`http://localhost:3000/autores/${id_autor}`),
+  return useMutation(id_autor => apiClient.delete(`/autores/${id_autor}`),
     {
       onSuccess: () => {
         queryClient.refetchQueries(['autores'])

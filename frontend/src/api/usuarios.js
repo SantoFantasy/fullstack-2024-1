@@ -1,14 +1,14 @@
 import { useQuery, useMutation } from "react-query";
-import axios from "axios";
+import apiClient from "./client";
 import { queryClient } from "../components/App";
 
 const fetchUsuarioes = async () => {
-  const { data } = await axios.get(`http://localhost:3000/usuarios`);
+  const { data } = await apiClient.get(`/usuarios`);
   return data;
 };
 
 const fetchUsuarioById = async (id) => {
-  const { data } = await axios.get(`http://localhost:3000/usuarios/${id}`);
+  const { data } = await apiClient.get(`/usuarios/${id}`);
   return data;
 };
 
@@ -23,7 +23,7 @@ export const useGetUsuario = (id, onSuccess) => {
 };
 
 export const useCreateUsuario = (onSuccess, onError) =>{
-  return useMutation(usuario => axios.post("http://localhost:3000/usuarios", usuario), {
+  return useMutation(usuario => apiClient.post("/usuarios", usuario), {
     onSuccess: data => {
       onSuccess(data);
       queryClient.refetchQueries(['usuarios'])
@@ -33,7 +33,7 @@ export const useCreateUsuario = (onSuccess, onError) =>{
 }
 
 export const useEditUsuario = (onSuccess, onError) => {
-  return useMutation(usuario => axios.patch(`http://localhost:3000/usuarios/${usuario.id}`, usuario),
+  return useMutation(usuario => apiClient.patch(`/usuarios/${usuario.id}`, usuario),
     {
       onSuccess: data => {
         onSuccess(data);
@@ -45,7 +45,7 @@ export const useEditUsuario = (onSuccess, onError) => {
 }
 
 export const useDeleteUsuario = (onError) => {
-  return useMutation(cod_usuario => axios.delete(`http://localhost:3000/usuarios/${cod_usuario}`),
+  return useMutation(cod_usuario => apiClient.delete(`/usuarios/${cod_usuario}`),
     {
       onSuccess: () => {
         queryClient.refetchQueries(['usuarios'])

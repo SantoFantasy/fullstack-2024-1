@@ -1,14 +1,14 @@
 import { useQuery, useMutation } from "react-query";
-import axios from "axios";
+import apiClient from "./client";
 import { queryClient } from "../components/App";
 
 const fetcheditoras = async () => {
-  const { data } = await axios.get(`http://localhost:3000/editoras`);
+  const { data } = await apiClient.get(`/editoras`);
   return data;
 };
 
 const fetchEditoraById = async (id) => {
-  const { data } = await axios.get(`http://localhost:3000/editoras/${id}`);
+  const { data } = await apiClient.get(`/editoras/${id}`);
   return data;
 };
 
@@ -25,7 +25,7 @@ export const useGetEditora = (id, onSuccess) => {
 };
 
 export const useCreateEditora = (onSuccess, onError) =>{
-  return useMutation(editora => axios.post("http://localhost:3000/editoras", editora), {
+  return useMutation(editora => apiClient.post("/editoras", editora), {
     onSuccess: data => {
       onSuccess(data);
       queryClient.refetchQueries(['editoras'])
@@ -35,7 +35,7 @@ export const useCreateEditora = (onSuccess, onError) =>{
 }
 
 export const useEditEditora = (onSuccess, onError) => {
-  return useMutation(editora => axios.patch(`http://localhost:3000/editoras/${editora.id_editora}`, editora),
+  return useMutation(editora => apiClient.patch(`/editoras/${editora.id_editora}`, editora),
     {
       onSuccess: data => {
         onSuccess(data);
@@ -47,7 +47,7 @@ export const useEditEditora = (onSuccess, onError) => {
 }
 
 export const useDeleteEditora = (onError) => {
-  return useMutation(id_editora => axios.delete(`http://localhost:3000/editoras/${id_editora}`),
+  return useMutation(id_editora => apiClient.delete(`/editoras/${id_editora}`),
     {
       onSuccess: () => {
         queryClient.refetchQueries(['editoras'])

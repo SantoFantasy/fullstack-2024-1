@@ -1,14 +1,14 @@
 import { useQuery, useMutation } from 'react-query';
-import axios from 'axios';
+import apiClient from './client';
 import { queryClient } from '../components/App';
 
 const fetchLivros = async () => {
-  const { data } = await axios.get(`http://localhost:3000/livros`);
+  const { data } = await apiClient.get(`/livros`);
   return data;
 };
 
 const fetchLivroById = async (id) => {
-  const { data } = await axios.get(`http://localhost:3000/livros/${id}`);
+  const { data } = await apiClient.get(`/livros/${id}`);
   return data;
 };
 
@@ -24,7 +24,7 @@ export const useGetLivro = (id, onSuccess) => {
 
 export const useCreateLivro = (onSuccess, onError) => {
   return useMutation(
-    (livro) => axios.post('http://localhost:3000/livros', livro),
+    (livro) => apiClient.post('/livros', livro),
     {
       onSuccess: (data) => {
         onSuccess(data);
@@ -38,7 +38,7 @@ export const useCreateLivro = (onSuccess, onError) => {
 export const useEditLivro = (onSuccess, onError) => {
   return useMutation(
     (livro) =>
-      axios.patch(`http://localhost:3000/livros/${livro.cod_isbn}`, livro),
+      apiClient.patch(`/livros/${livro.cod_isbn}`, livro),
     {
       onSuccess: (data) => {
         onSuccess(data);
@@ -51,7 +51,7 @@ export const useEditLivro = (onSuccess, onError) => {
 
 export const useDeleteLivro = (onError) => {
   return useMutation(
-    (id_livro) => axios.delete(`http://localhost:3000/livros/${id_livro}`),
+    (id_livro) => apiClient.delete(`/livros/${id_livro}`),
     {
       onSuccess: () => {
         queryClient.refetchQueries(['livros']);
