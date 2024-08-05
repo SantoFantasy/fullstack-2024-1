@@ -7,7 +7,7 @@ import {
   DataType,
 } from 'sequelize-typescript';
 
-@Table
+@Table({ tableName: 'Autores' })
 export class Autor extends Model {
   @AutoIncrement
   @PrimaryKey
