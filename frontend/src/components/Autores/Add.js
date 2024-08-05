@@ -49,7 +49,7 @@ const Add = ({ setIsAdding }) => {
   return (
     <Container maxW="100%" w="100%">
       <form onSubmit={handleAdd}>
-        <Heading size='md'>Edit Autor</Heading>
+        <Heading size='md'>Add Autor</Heading>
         <FormControl>
           <FormLabel htmlFor="nome">Nome</FormLabel>
           <Input

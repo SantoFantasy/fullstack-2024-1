@@ -6,6 +6,10 @@ import { Input, Button, Box, FormControl, FormLabel, Container, Heading, Flex } 
 const Add = ({ setIsAdding }) => {
   const [nome, setNome] = useState('')
   const [cidade, setCidade] = useState('')
+  const [endereco, setEndereco] = useState('')
+  const [telefone, setTelefone] = useState('')
+  const [cep, setCep] = useState('')
+  const [email, setEmail] = useState('')
 
   const mutation = useCreateEditora(
     () =>  Swal.fire({
@@ -38,7 +42,11 @@ const Add = ({ setIsAdding }) => {
 
     mutation.mutate({
       nome,
-      cidade
+      cidade,
+      endereco,
+      telefone,
+      cep,
+      email
     })
   };
 
@@ -60,10 +68,50 @@ const Add = ({ setIsAdding }) => {
           <FormLabel htmlFor="cidade">Cidade</FormLabel>
           <Input
             id="cidade"
-            type="date"
+            type="text"
             name="cidade"
             value={cidade}
             onChange={e => setCidade(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="Endereço">Endereço</FormLabel>
+          <Input
+            id="endereco"
+            type="text"
+            name="endereco"
+            value={endereco}
+            onChange={e => setEndereco(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="CEP">CEP</FormLabel>
+          <Input
+            id="cep"
+            type="text"
+            name="cep"
+            value={cep}
+            onChange={e => setCep(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="Telefone">Telefone</FormLabel>
+          <Input
+            id="telefone"
+            type="text"
+            name="telefone"
+            value={telefone}
+            onChange={e => setTelefone(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="email">E-mail</FormLabel>
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
         </FormControl>
         <Flex pt="1rem" justifyContent="flex-end">

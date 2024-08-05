@@ -16,10 +16,16 @@ import {
 import { Autores } from "../Autores";
 import { Editoras } from "../Editoras";
 import { Usuarios } from "../Usuarios";
-// import { Home } from "../Home";
+import { Livros } from "../Livros";
 import { Header } from "./Header";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    }
+  }
+});
 
 const App = () => {
   return (
@@ -39,7 +45,7 @@ const App = () => {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <p>Livro</p>
+                    <Livros />
                   </TabPanel>
                   <TabPanel>
                     <Autores />

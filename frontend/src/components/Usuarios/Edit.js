@@ -1,124 +1,211 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { useEditAutor, useGetAutor } from '../../api/autores'
-import { Input, Heading, Button, Box, FormControl, FormLabel, Container, Flex } from '@chakra-ui/react'
+import { useEditUsuario, useGetUsuario } from '../../api/usuarios';
+import {
+  Input,
+  Box,
+  FormControl,
+  FormLabel,
+  Container,
+  Checkbox,
+  Flex,
+  Button,
+} from '@chakra-ui/react';
 
-const Edit = ({ autorId,  setIsEditing }) => {
+const Edit = ({ usuarioId, setIsEditing }) => {
+  const { data, isFetching, error } = useGetUsuario(usuarioId, (usuario) => {
+    setAdmin(usuario.admin_status);
+    setFuncionario(usuario.func_status);
+  });
 
-  const { isFetching, error } = useGetAutor(autorId,
-    (autor) => {
-      setNome(autor.nome)
-      setData_nascimento(autor.data_nascimento)
-      setNacionalidade(autor.nacionalidade)
-      setBiografia(autor.biografia)
-    }
-  );
-
-  const [nome, setNome] = useState('')
-  const [data_nascimento, setData_nascimento] = useState('')
-  const [nacionalidade, setNacionalidade] = useState('')
-  const [biografia, setBiografia] = useState('')
-
-  
-  const mutation = useEditAutor(
-    () =>  Swal.fire({
-      icon: 'success',
-      title: 'Atualizado!',
-      text: `${nome} atualizado.`,
-      showConfirmButton: true,
-      didClose: () => setIsEditing(false)
-    }),
-    () => Swal.fire({
-      icon: 'error',
-      title: 'Error!',
-      text: 'Problemas!',
-      showConfirmButton: true
-    })
-  )
-
-  const handleUpdate = e => {
-    e.preventDefault();
-
-    if (!nome || !data_nascimento || !nacionalidade) {
-      return Swal.fire({
+  const mutation = useEditUsuario(
+    () =>
+      Swal.fire({
+        icon: 'success',
+        title: 'Added!',
+        text: `${data.nome} criado com sucesso.`,
+        showConfirmButton: false,
+        timer: 1500,
+        didClose: () => setIsEditing(false),
+      }),
+    () =>
+      Swal.fire({
         icon: 'error',
         title: 'Error!',
-        text: 'All fields are required.',
+        text: 'Problemas!',
         showConfirmButton: true,
-      });
-    }
-    mutation.mutate({
-      id_autor: autorId,
-      nome,
-      data_nascimento,
-      nacionalidade,
-      biografia
-    })
+      }),
+  );
 
+  const [admin, setAdmin] = useState(false);
+  const [funcionario, setFuncionario] = useState(false);
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    mutation.mutate({
+      ...data,
+      id: usuarioId,
+      admin_status: admin,
+      func_status: funcionario,
+    });
   };
 
-  if (isFetching)
-    return <div>Loading...</div>
+  if (isFetching) return <div>Loading...</div>;
 
-  if (error)
-    return <div>Error...</div>
+  if (error) return <div>Error...</div>;
 
   return (
     <Container maxW="100%" w="100%">
-      <form onSubmit={handleUpdate}>
-        <Heading size='md'>Edit Autor</Heading>
+      <form onSubmit={handleAdd}>
         <FormControl>
-          <FormLabel htmlFor="nome">Nome</FormLabel>
+          <FormLabel>Nome</FormLabel>
           <Input
             id="nome"
             type="text"
             name="nome"
-            value={nome}
-            onChange={e => setNome(e.target.value)}
+            isRequired
+            defaultValue={data.nome}
           />
         </FormControl>
         <FormControl>
-          <FormLabel htmlFor="nascimento">Data Nascimento</FormLabel>
+          <FormLabel>CPF</FormLabel>
           <Input
+            id="CPF"
+            type="text"
+            name="CPF"
+            isRequired
+            defaultValue={data.cpf}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Sexo</FormLabel>
+          <Input
+            placeholder="(M)masculino, F(feminino), O(outro)"
+            id="sexo"
+            type="text"
+            name="sexo"
+            isRequired
+            defaultValue={data.sexo}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Nascimento</FormLabel>
+          <Input
+            placeholder="dd/mm/aaaa"
             id="nascimento"
             type="date"
             name="nascimento"
-            value={data_nascimento.substring(0, 10)}
-            onChange={e => setData_nascimento(e.target.value)}
+            isRequired
+            defaultValue={data.data_nascimento.substring(0, 10)}
           />
         </FormControl>
         <FormControl>
-          <FormLabel htmlFor="nacionalidade">Nacionalidade</FormLabel>
+          <FormLabel>Endereço</FormLabel>
           <Input
-            id="nacionalidade"
+            id="endereco"
             type="text"
-            name="nacionalidade"
-            value={nacionalidade}
-            onChange={e => setNacionalidade(e.target.value)}
+            name="endereco"
+            isRequired
+            defaultValue={data.endereco}
           />
         </FormControl>
         <FormControl>
-          <FormLabel htmlFor="biografia">Biografia</FormLabel>
+          <FormLabel>Bairro</FormLabel>
           <Input
-            id="biografia"
+            id="bairro"
             type="text"
-            name="biografia"
-            value={biografia}
-            onChange={e => setBiografia(e.target.value)}
+            name="bairro"
+            isRequired
+            defaultValue={data.bairro}
           />
         </FormControl>
-        <Flex pt="1rem" justifyContent="flex-end">
-          <Box mr="1rem">
-            <Button type="submit" colorScheme='blue'>Salvar</Button>
-          </Box>
-          <Box>
-            <Input
-              type="Button"
-              value="Cancelar"
-              onClick={() => setIsEditing(false)}
-            />
-          </Box>
-        </Flex>
+        <FormControl>
+          <FormLabel>Cidade</FormLabel>
+          <Input
+            id="cidade"
+            type="text"
+            name="cidade"
+            isRequired
+            defaultValue={data.cidade}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>CEP</FormLabel>
+          <Input
+            id="cep"
+            type="text"
+            name="cep"
+            isRequired
+            defaultValue={data.cep}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Telefone</FormLabel>
+          <Input
+            id="telefone"
+            type="text"
+            name="telefone"
+            isRequired
+            defaultValue={data.telefone}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Email</FormLabel>
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            isRequired
+            defaultValue={data.email}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Senha</FormLabel>
+          <Input
+            id="senha"
+            name="senha"
+            type="password"
+            isRequired
+            defaultValue={data.senha}
+          />
+        </FormControl>
+        <Box>
+          <Flex pt="1rem" justifyContent="flex-end">
+            <Box mr="1rem">
+              <FormControl>
+                <FormLabel>É Funcionário?</FormLabel>
+                <Checkbox
+                  id="funcionario"
+                  name="funcionario"
+                  value={funcionario}
+                  isChecked={funcionario}
+                  onChange={(e) => setFuncionario(Boolean(e.target.checked))}
+                />
+              </FormControl>
+            </Box>
+            <Box mr="1rem">
+              <FormControl>
+                <FormLabel>Administrador</FormLabel>
+                <Checkbox
+                  id="admin"
+                  name="admin"
+                  value={admin}
+                  isChecked={admin}
+                  onChange={(e) => setAdmin(Boolean(e.target.checked))}
+                />
+              </FormControl>
+            </Box>
+            <Box mr="1rem">
+              <Button type="submit" colorScheme="blue">
+                Salvar
+              </Button>
+            </Box>
+            <Box>
+              <Button onClick={() => setIsEditing(false)}>Cancelar</Button>
+            </Box>
+          </Flex>
+        </Box>
       </form>
     </Container>
   );

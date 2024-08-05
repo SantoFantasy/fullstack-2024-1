@@ -13,7 +13,9 @@ const fetchAutorById = async (id) => {
 };
 
 export const useGetAutores = (params) => {
-  return useQuery(["autores"], () => fetchAutores(params));
+  return useQuery(["autores"], () => fetchAutores(params), {
+    staleTime: Infinity
+  });
 };
 
 export const useGetAutor = (id, onSuccess) => {

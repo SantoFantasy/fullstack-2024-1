@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   Table,
@@ -9,11 +9,12 @@ import {
   Td,
   TableContainer,
   Button,
-} from "@chakra-ui/react";
+  Tag,
+} from '@chakra-ui/react';
 
 const formatter = new Intl.DateTimeFormat(navigator.language, {
-  dateStyle: "medium",
-  timeZone: "UTC",
+  dateStyle: 'medium',
+  timeZone: 'UTC',
 });
 
 const AutoresTable = ({ usuarios, handleEdit, handleDelete }) => {
@@ -33,21 +34,16 @@ const AutoresTable = ({ usuarios, handleEdit, handleDelete }) => {
             <Th>cep</Th>
             <Th>telefone</Th>
             <Th>email</Th>
-            <Th>func_status</Th>
-            <Th>admin_status</Th>
             <Th>usuario</Th>
-            <Th>senha</Th>
+            <Th colSpan={2}>Tipo</Th>
             <Th colSpan={2}>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
           {usuarios.length > 0 ? (
             usuarios.map((usuario) => (
-              <Tr key={usuario.id_usuario}>
-                <Td>{usuario.id_usuario}</Td>
+              <Tr key={usuario.cod_usuario}>
                 <Td>{usuario.cod_usuario}</Td>
-                <Td>{usuario.func_status}</Td>
-                <Td>{usuario.admin_status}</Td>
                 <Td>{usuario.nome}</Td>
                 <Td>{usuario.cpf}</Td>
                 <Td>{formatter.format(new Date(usuario.data_nascimento))}</Td>
@@ -59,18 +55,21 @@ const AutoresTable = ({ usuarios, handleEdit, handleDelete }) => {
                 <Td>{usuario.telefone}</Td>
                 <Td>{usuario.email}</Td>
                 <Td>{usuario.usuario}</Td>
-                <Td>{usuario.senha}</Td>
+                <Td>{usuario.func_status ? <Tag>Func</Tag> : null}</Td>
+                <Td>{usuario.admin_status ? <Tag>Admin</Tag> : null}</Td>
                 <Td>
                   <Button
                     colorScheme="blue"
-                    onClick={() => handleEdit(usuario.id_usuario)}>
+                    onClick={() => handleEdit(usuario.cod_usuario)}
+                  >
                     Edit
                   </Button>
                 </Td>
                 <Td>
                   <Button
                     colorScheme="red"
-                    onClick={() => handleDelete(usuario.id_usuario)}>
+                    onClick={() => handleDelete(usuario.cod_usuario)}
+                  >
                     Delete
                   </Button>
                 </Td>

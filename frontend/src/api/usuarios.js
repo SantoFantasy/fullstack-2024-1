@@ -33,7 +33,7 @@ export const useCreateUsuario = (onSuccess, onError) =>{
 }
 
 export const useEditUsuario = (onSuccess, onError) => {
-  return useMutation(usuario => axios.patch(`http://localhost:3000/usuarios/${usuario.id_usuario}`, usuario),
+  return useMutation(usuario => axios.patch(`http://localhost:3000/usuarios/${usuario.id}`, usuario),
     {
       onSuccess: data => {
         onSuccess(data);
@@ -45,7 +45,7 @@ export const useEditUsuario = (onSuccess, onError) => {
 }
 
 export const useDeleteUsuario = (onError) => {
-  return useMutation(id_usuario => axios.delete(`http://localhost:3000/usuarios/${id_usuario}`),
+  return useMutation(cod_usuario => axios.delete(`http://localhost:3000/usuarios/${cod_usuario}`),
     {
       onSuccess: () => {
         queryClient.refetchQueries(['usuarios'])

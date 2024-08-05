@@ -17,20 +17,20 @@ const EditorasTable = ({ editoras, handleEdit, handleDelete }) => {
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th>editora.id</Th>
-            <Th>editora.nome</Th>
-            <Th>editora.endereco</Th>
-            <Th>editora.cidade</Th>
-            <Th>editora.cep</Th>
-            <Th>editora.telefone</Th>
-            <Th>editora.email</Th>
+            <Th>ID</Th>
+            <Th>Nome</Th>
+            <Th>Endereco</Th>
+            <Th>Cidade</Th>
+            <Th>Cep</Th>
+            <Th>Telefone</Th>
+            <Th>Email</Th>
             <Th colSpan={2}>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
           {editoras.length > 0 ? (
             editoras.map((editora) => (
-              <Tr key={editora.id_editora}>
+              <Tr key={editora.id}>
                 <Td>{editora.id}</Td>
                 <Td>{editora.nome}</Td>
                 <Td>{editora.endereco}</Td>

@@ -13,7 +13,9 @@ const fetchEditoraById = async (id) => {
 };
 
 export const useGetEditoras = (params) => {
-  return useQuery(["editoras"], () => fetcheditoras(params));
+  return useQuery(["editoras"], () => fetcheditoras(params), {
+    staleTime: Infinity
+  });
 };
 
 export const useGetEditora = (id, onSuccess) => {
