@@ -3,18 +3,27 @@ import Swal from 'sweetalert2';
 import { useEditEditora, useGetEditora } from '../../api/editoras'
 import { Input, Heading, Button, Box, FormControl, FormLabel, Container, Flex } from '@chakra-ui/react'
 
-const Edit = ({ editoraId,  setIsEditing }) => {
+const Edit = ({ id,  setIsEditing }) => {
 
-  const { isFetching, error } = useGetEditora(editoraId,
+  const { isFetching, error } = useGetEditora(id,
     (editora) => {
       setNome(editora.nome)
       setCidade(editora.data_nascimento)
+      setEndereco(editora.endereco)
+      setCep(editora.cep)
+      setTelefone(editora.telefone)
+      setEmail(editora.email)
     }
   );
 
   const [nome, setNome] = useState('')
   const [cidade, setCidade] = useState('')
-  
+  const [endereco, setEndereco] = useState('')
+  const [cep, setCep] = useState('')
+  const [telefone, setTelefone] = useState('')
+  const [email, setEmail] = useState('')
+
+
   const mutation = useEditEditora(
     () =>  Swal.fire({
       icon: 'success',
@@ -43,9 +52,13 @@ const Edit = ({ editoraId,  setIsEditing }) => {
       });
     }
     mutation.mutate({
-      id_editora: editoraId,
+      id,
       nome,
       cidade,
+      endereco,
+      telefone,
+      cep,
+      email
     })
 
   };
@@ -74,10 +87,50 @@ const Edit = ({ editoraId,  setIsEditing }) => {
           <FormLabel htmlFor="cidade">Cidade</FormLabel>
           <Input
             id="cidade"
-            type="date"
+            type="text"
             name="cidade"
             value={cidade}
             onChange={e => setCidade(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="Endereço">Endereço</FormLabel>
+          <Input
+            id="endereco"
+            type="text"
+            name="endereco"
+            value={endereco}
+            onChange={e => setEndereco(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="CEP">CEP</FormLabel>
+          <Input
+            id="cep"
+            type="text"
+            name="cep"
+            value={cep}
+            onChange={e => setCep(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="Telefone">Telefone</FormLabel>
+          <Input
+            id="telefone"
+            type="text"
+            name="telefone"
+            value={telefone}
+            onChange={e => setTelefone(e.target.value)}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel htmlFor="email">E-mail</FormLabel>
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
         </FormControl>
         <Flex pt="1rem" justifyContent="flex-end">

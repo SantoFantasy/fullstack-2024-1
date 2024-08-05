@@ -39,17 +39,13 @@ const EditorasTable = ({ editoras, handleEdit, handleDelete }) => {
                 <Td>{editora.telefone}</Td>
                 <Td>{editora.email}</Td>
                 <Td>
-                  <Button
-                    colorScheme="blue"
-                    onClick={() => handleEdit(editora.id_editora)}>
-                    Edit
+                  <Button colorScheme='blue' onClick={() => handleEdit(editora.id)}>
+                      Edit
                   </Button>
                 </Td>
                 <Td>
-                  <Button
-                    colorScheme="red"
-                    onClick={() => handleDelete(editora.id_editora)}>
-                    Delete
+                  <Button colorScheme='red' onClick={() => handleDelete(editora.id)}>
+                      Delete
                   </Button>
                 </Td>
               </Tr>

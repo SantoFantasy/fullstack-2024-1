@@ -7,13 +7,13 @@ import {
 
 import { useGetAutores } from '../../api/autores'
 import { useGetEditoras } from '../../api/editoras';
-import { useCreateLivro, useEditLivro, useGetLivro } from '../../api/livros';
+import { useEditLivro, useGetLivro } from '../../api/livros';
 
 export const Edit = ({ codISBN, setIsEditing }) => {
   const { data, isFetching } = useGetLivro(codISBN);
   const { data: autores, isFetching: autoresFetching} = useGetAutores()
   const { data: editoras, isFetching: editorasFetching } = useGetEditoras()
-  
+
   const mutation = useEditLivro(
     () =>  Swal.fire({
       icon: 'success',
@@ -31,7 +31,7 @@ export const Edit = ({ codISBN, setIsEditing }) => {
     })
   )
 
-  const handleAdd = e => {
+  const handleEdit = e => {
     e.preventDefault();
     const data = new FormData(e.target)
     mutation.mutate({
@@ -48,7 +48,7 @@ export const Edit = ({ codISBN, setIsEditing }) => {
   return (
     <Container maxW="100%" w="100%">
       <Heading size='md'>Adicionar Livro</Heading>
-      <form onSubmit={handleAdd}>
+      <form onSubmit={handleEdit}>
         <FormControl>
           <FormLabel htmlFor="titulo">titulo</FormLabel>
           <Input
@@ -157,7 +157,7 @@ export const Edit = ({ codISBN, setIsEditing }) => {
             )}
             options={autores.map(autor => ({value: autor.id_autor, label: autor.nome}))}
           />
-        </FormControl> 
+        </FormControl>
         <Flex pt="1rem" justifyContent="flex-end">
           <Box mr="1rem">
             <Button type="submit" colorScheme='blue'>Salvar</Button>

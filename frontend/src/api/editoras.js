@@ -35,7 +35,7 @@ export const useCreateEditora = (onSuccess, onError) =>{
 }
 
 export const useEditEditora = (onSuccess, onError) => {
-  return useMutation(editora => apiClient.patch(`/editoras/${editora.id_editora}`, editora),
+  return useMutation((editora) => apiClient.patch(`/editoras/${editora.id}`, editora),
     {
       onSuccess: data => {
         onSuccess(data);
@@ -47,12 +47,13 @@ export const useEditEditora = (onSuccess, onError) => {
 }
 
 export const useDeleteEditora = (onError) => {
-  return useMutation(id_editora => apiClient.delete(`/editoras/${id_editora}`),
+  return useMutation(
+    (id) => apiClient.delete(`/editoras/${id}`),
     {
       onSuccess: () => {
-        queryClient.refetchQueries(['editoras'])
+        queryClient.refetchQueries(['editoras']);
       },
       onError,
-    }
+    },
   );
-}
+};
