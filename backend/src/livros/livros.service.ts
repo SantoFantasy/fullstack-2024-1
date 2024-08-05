@@ -36,7 +36,7 @@ export class LivrosService {
         qtd_paginas: createLivroDto.qtd_paginas,
         qtd_copias: createLivroDto.qtd_copias,
       });
-      const relations = await Promise.allSettled(createLivroDto.autores.map(autor =>{ 
+      const relations = await Promise.allSettled(createLivroDto.autores.map(autor =>{
           return this.livroAutoresModel.create({
             cod_isbn: newLivro.cod_isbn,
             id_autor: autor
@@ -80,7 +80,7 @@ export class LivrosService {
             cod_isbn: isbn,
         },
       });
-      
+
       if (updateLivroDto.cod_isbn) livro.set('cod_isbn', updateLivroDto.cod_isbn);
       if (updateLivroDto.edicao) livro.set('edicao', updateLivroDto.edicao);
       if (updateLivroDto.titulo) livro.set('titulo', updateLivroDto.titulo);
@@ -92,21 +92,21 @@ export class LivrosService {
       if (updateLivroDto.cdd) livro.set('cdd', updateLivroDto.cdd);
       if (updateLivroDto.qtd_paginas) livro.set('qtd_paginas', updateLivroDto.qtd_paginas);
       if (updateLivroDto.qtd_copias) livro.set('qtd_copias', updateLivroDto.qtd_copias);
-      
-      
+
+
       await this.livroAutoresModel.destroy({
         where: {
           cod_isbn: isbn
         }
       });
-      
+
       const relations = await Promise.allSettled(updateLivroDto.autores.map(autor => {
         return this.livroAutoresModel.create({
           cod_isbn: livro.cod_isbn,
           id_autor: autor
         })
       }))
-      
+
       if (relations.some(promise => promise.status === 'rejected')) {
         throw new Error("Force rollback");
       }
@@ -117,11 +117,15 @@ export class LivrosService {
     });
   }
 
-  async remove(id: number) {
-    const livro = await this.livrosModel.findByPk(id);
+  async remove(cod_isbn: string) {
+  const livro = await this.livrosModel.findOne({ where: { cod_isbn: cod_isbn } });
+  const autores =  await this.livroAutoresModel.findAll({  where: { cod_isbn: cod_isbn }})
     if (!livro) {
       // TODO: throw a custom exception
     } else {
+      autores.forEach(async autor => {
+        await autor.destroy();
+      })
       return livro.destroy();
     }
   }

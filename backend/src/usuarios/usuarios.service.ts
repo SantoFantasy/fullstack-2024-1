@@ -73,6 +73,11 @@ export class UsuariosService {
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} usuario`;
+    // return `This action removes a #${id} usuario`;
+    const usuario = await this.usuariosModel.findByPk(id);
+    if (!usuario) {
+    } else {
+      return usuario.destroy();
+    }
   }
 }

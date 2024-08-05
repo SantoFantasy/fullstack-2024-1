@@ -32,13 +32,13 @@ export class LivrosController {
     return this.livrosService.findOneByIsbn(isbn);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLivroDto: UpdateLivroDto) {
-    return this.livrosService.update(id, updateLivroDto);
+  @Patch(':isbn')
+  update(@Param('isbn') isbn: string, @Body() updateLivroDto: UpdateLivroDto) {
+    return this.livrosService.update(isbn, updateLivroDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.livrosService.remove(+id);
+  @Delete(':isbn')
+  remove(@Param('isbn') isbn: string) {
+    return this.livrosService.remove(isbn);
   }
 }
