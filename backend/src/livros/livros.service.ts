@@ -37,7 +37,6 @@ export class LivrosService {
         qtd_copias: createLivroDto.qtd_copias,
       });
       const relations = await Promise.allSettled(createLivroDto.autores.map(autor =>{ 
-          console.log(" aAAAAAAAAAAAAAAAAAAAAAAAAA", autor, newLivro.id);
           return this.livroAutoresModel.create({
             cod_isbn: newLivro.cod_isbn,
             id_autor: autor
