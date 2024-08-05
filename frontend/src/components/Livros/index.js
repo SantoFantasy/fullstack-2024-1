@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { Container, Button } from "@chakra-ui/react";
 
-import AutoresTable from "./Table";
+import LivrosTable from "./Table";
 import Add from "./Add";
 import { Edit } from "./Edit";
 
@@ -10,7 +10,7 @@ import { useDeleteLivro, useGetLivros } from "../../api/livros";
 
 export const Livros = () => {
   const { data: livrosData, isFetching, error } = useGetLivros();
-  const deleteAutor = useDeleteLivro(() =>
+  const deleteLivro = useDeleteLivro(() =>
     Swal.fire({
       icon: "error",
       title: "Error!",
@@ -38,7 +38,7 @@ export const Livros = () => {
       cancelButtonText: "Não, cancele!",
     }).then(result => {
       if (result.value) {
-        deleteAutor.mutate(id);
+        deleteLivro.mutate(id);
       }
     });
   };
@@ -52,7 +52,7 @@ export const Livros = () => {
       {!isAdding && !isEditing && (
         <>
           <Button onClick={() => setIsAdding(true)}>Add Livro</Button>
-          <AutoresTable
+          <LivrosTable
             livros={livrosData}
             handleEdit={handleEdit}
             handleDelete={handleDelete}

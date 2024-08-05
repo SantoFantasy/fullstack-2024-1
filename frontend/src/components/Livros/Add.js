@@ -12,12 +12,23 @@ import { useCreateLivro } from '../../api/livros';
 const Add = ({ setIsAdding }) => {
   const { data: autores, isFetching: autoresFetching} = useGetAutores()
   const { data: editoras, isFetching: editorasFetching } = useGetEditoras()
-  
+  const [titulo, setTitulo] = useState('')
+  const [cod_isbn, setCodIsbn] = useState('')
+  const [tipo_capa, setTipoCapa] = useState('')
+  const [ano_publicacao, setAnoPublicacao] = useState('')
+  const [genero, setGenero] = useState('')
+  const [cdd, setCdd] = useState('')
+  const [qtd_paginas, setQtdPaginas] = useState('')
+  const [edicao, setEdicao] = useState('')
+  const [idioma, setIdioma] = useState('')
+  const [qtd_copias, setQtdCopias] = useState('')
+
+
   const mutation = useCreateLivro(
     () =>  Swal.fire({
       icon: 'success',
       title: 'Added!',
-      text: `${nome} criado com sucesso.`,
+      text: `${titulo} criado com sucesso.`,
       showConfirmButton: false,
       timer: 1500,
       didClose: () => setIsAdding(false)
@@ -56,6 +67,7 @@ const Add = ({ setIsAdding }) => {
             id="cod_isbn"
             type="text"
             name="cod_isbn"
+            onChange={e => setCodIsbn(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -64,6 +76,7 @@ const Add = ({ setIsAdding }) => {
             id="titulo"
             type="text"
             name="titulo"
+            onChange={e => setTitulo(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -72,6 +85,7 @@ const Add = ({ setIsAdding }) => {
             id="tipo_capa"
             type="text"
             name="tipo_capa"
+            onChange={e => setTipoCapa(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -80,6 +94,7 @@ const Add = ({ setIsAdding }) => {
             id="ano_publicacao"
             type="number"
             name="ano_publicacao"
+            onChange={e => setAnoPublicacao(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -88,6 +103,7 @@ const Add = ({ setIsAdding }) => {
             id="genero"
             type="text"
             name="genero"
+            onChange={e => setGenero(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -96,6 +112,7 @@ const Add = ({ setIsAdding }) => {
             id="cdd"
             type="text"
             name="cdd"
+            onChange={e => setCdd(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -104,6 +121,7 @@ const Add = ({ setIsAdding }) => {
             id="qtd_paginas"
             type="number"
             name="qtd_paginas"
+            onChange={e => setQtdPaginas(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -112,6 +130,7 @@ const Add = ({ setIsAdding }) => {
             id="edicao"
             type="number"
             name="edicao"
+            onChange={e => setEdicao(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -120,6 +139,7 @@ const Add = ({ setIsAdding }) => {
             id="idioma"
             type="text"
             name="idioma"
+            onChange={e => setIdioma(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -128,6 +148,7 @@ const Add = ({ setIsAdding }) => {
             id="qtd_copias"
             type="number"
             name="qtd_copias"
+            onChange={e => setQtdCopias(e.target.value)}
           />
         </FormControl>
         <FormControl>
@@ -148,7 +169,7 @@ const Add = ({ setIsAdding }) => {
             isMulti
             options={autores.map(autor => ({value: autor.id_autor, label: autor.nome}))}
           />
-        </FormControl> 
+        </FormControl>
         <Flex pt="1rem" justifyContent="flex-end">
           <Box mr="1rem">
             <Button type="submit" colorScheme='blue'>Salvar</Button>

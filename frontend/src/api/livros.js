@@ -51,7 +51,7 @@ export const useEditLivro = (onSuccess, onError) => {
 
 export const useDeleteLivro = (onError) => {
   return useMutation(
-    (id_livro) => apiClient.delete(`/livros/${id_livro}`),
+    (livro) => apiClient.delete(`/livros/${livro.cod_isbn}`, livro),
     {
       onSuccess: () => {
         queryClient.refetchQueries(['livros']);
