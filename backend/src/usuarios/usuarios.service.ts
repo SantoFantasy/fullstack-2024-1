@@ -25,6 +25,9 @@ export class UsuariosService {
       telefone: createUsuarioDto.telefone,
       email: createUsuarioDto.email,
       func_status: createUsuarioDto.func_status,
+      admin_status: createUsuarioDto.admin_status,
+      usuario: createUsuarioDto.usuario,
+      senha: createUsuarioDto.senha,
     });
   }
 
@@ -39,7 +42,7 @@ export class UsuariosService {
     return this.usuariosModel.findAll({
       where: attributes,
       limit: limit,
-      offset: (page + 1) * limit,
+      offset: (page) * limit,
     });
   }
 
@@ -70,6 +73,11 @@ export class UsuariosService {
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} usuario`;
+    // return `This action removes a #${id} usuario`;
+    const usuario = await this.usuariosModel.findByPk(id);
+    if (!usuario) {
+    } else {
+      return usuario.destroy();
+    }
   }
 }

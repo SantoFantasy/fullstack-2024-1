@@ -1,10 +1,10 @@
-FROM node:20.14.0-slim as baseimg
+FROM node:20.14.0-slim AS baseimg
 
 WORKDIR /app
 COPY package.json package-lock.json tsconfig.json tsconfig.build.json ./
 RUN npm ci
 
-FROM baseimg as builder
+FROM baseimg AS builder
 WORKDIR /app
 COPY --from=baseimg /app/ /app
 COPY src/ ./src

@@ -27,23 +27,18 @@ export class LivrosController {
     return this.livrosService.findAll(params.livro(), params.page, params.size);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.livrosService.findOneById(+id);
-  }
-
   @Get(':isbn')
   findOneByIsbn(@Param('isbn') isbn: string) {
-    return this.livrosService.findOneByIsbn(+isbn);
+    return this.livrosService.findOneByIsbn(isbn);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLivroDto: UpdateLivroDto) {
-    return this.livrosService.update(+id, updateLivroDto);
+  @Patch(':isbn')
+  update(@Param('isbn') isbn: string, @Body() updateLivroDto: UpdateLivroDto) {
+    return this.livrosService.update(isbn, updateLivroDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.livrosService.remove(+id);
+  @Delete(':isbn')
+  remove(@Param('isbn') isbn: string) {
+    return this.livrosService.remove(isbn);
   }
 }

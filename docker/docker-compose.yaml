@@ -13,7 +13,8 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - biblioteca-network
+      biblioteca-network:
+        ipv4_address: 172.20.0.2
     healthcheck:
       test: pg_isready -U postgres -d postgres
       interval: 10s
@@ -27,13 +28,13 @@ services:
       PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
       PGADMIN_DEFAULT_PASSWORD: postgres
       UID: 1000
-      
     volumes:
       - ./servers.json:/pgadmin4/servers.json
     ports:
       - "5050:80"
     networks:
-      - biblioteca-network
+      biblioteca-network:
+        ipv4_address: 172.20.0.3
 
   biblioteca_backend:
     container_name: biblioteca_backend
@@ -53,8 +54,30 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: biblioteca
     networks:
+      biblioteca-network:
+        ipv4_address: 172.20.0.4
+
+  biblioteca_frontend:
+    container_name: biblioteca_frontend
+    build: 
+      context: ../frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_BACKEND_URL: http://localhost:3000
+        PORT: 3000
+    image: biblioteca_frontend
+    ports:
+      - "8080:3000"
+    depends_on:
+      - biblioteca_backend
+    networks:
       - biblioteca-network
 
 networks:
   biblioteca-network:
-    driver: "bridge"
+    name: biblioteca-network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.20.0.0/24"

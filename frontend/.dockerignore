@@ -1,0 +1,27 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build artifacts
+dist/
+build/
+
+# Ignore environment files
+.env
+
+# Ignore log files
+*.log
+
+# Ignore temporary files
+*.tmp
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+
+# Ignore version control files
+.git/
+.gitignore
+
+# Ignore package lock files
+# package-lock.json # make sense keep those files for production 
+# yarn.lock # make sense keep those files for production

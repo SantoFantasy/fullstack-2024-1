@@ -29,11 +29,8 @@ export class Livro extends Model {
   @Column({ allowNull: false, type: DataType.STRING(255) })
   titulo: string;
 
-  @BelongsToMany(() => Autor, () => Livros_Autores, 'id_autor', 'cod_isbn')
-  autores: Autor[];
-
-  @BelongsTo(() => Editora, 'id_editora')
-  editora: Editora;
+  @Column({ allowNull: false, type: DataType.INTEGER })
+  editora: number;
 
   @NotNull
   @Column({ allowNull: false, type: DataType.STRING(1) })
